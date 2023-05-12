@@ -12,18 +12,8 @@
 
 #include "push_swap.h"
 
-int	input_check(int ac, char **av)
-{
-	if (!ft_check_all_digits(ac, av))
-		return (0);
-	if (!ft_check_num_size(ac, av))
-		return (0);
-	// if (!ft_check_num_dup(ac, av))
-	// 	return (0);
-	return (1);
-}
-
-static int ft_check_all_digits(int ac, char **av)
+// checks if all inputs consists of digits only ('-' sign also included)
+int check_all_digits(int ac, char **av)
 {
 	int	i;
 	int	j;
@@ -43,12 +33,37 @@ static int ft_check_all_digits(int ac, char **av)
 	return (1);
 }
 
-// static int ft_check_num_size(int ac, char **av)
-// {
+// check whether input number is within the int range
+int check_num_size(int ac, char **av)
+{
+	int				av_count;
+	long long int	num;
 
-// }
+	av_count = 0;
+	num = 0;
+	while (av[++av_count])
+	{
+		num = ft_atoi_ll(av[av_count]);
+		if (num > 2147483647 || num < -2147483648)
+			return (0);
+	}
+	return (1);
+}
 
-// static int ft_check_num_dup(int ac, char **av)
-// {
+int	lst_check_dup(t_dlist *stack_a)
+{
+	int	current_num;
 
-// }
+	while (stack_a->next)
+	{
+		current_num = stack_a->content;
+		while (stack_a->next)
+		{
+			stack_a = stack_a->next;
+			if (current_num == stack_a->content)
+				return (0);
+		}
+		stack_a = stack_a->next;
+	}
+	return (1);
+}

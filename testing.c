@@ -3,7 +3,9 @@
 
 int main()
 {
-    int num = 2147483648;
+    int i = 0;
+    char str[8] = "testings";
 
-    printf("%ld", (long int)num);
+    ++i++;
+    printf("%d", i);
 }

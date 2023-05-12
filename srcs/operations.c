@@ -12,6 +12,21 @@
 
 #include "push_swap.h"
 
+NULL <-|1|-> 2
+   1 <-|2|-> 3
+   2 <-|3|-> 4
+       ...
+
+
+/*
+original: 1 2 3 
+altered:  2 1 3
+
+swapping:
+	store 2nd num in temp
+
+*/
+
 void	swap(char c, int *stack_a, int *stack_b)
 {
 	if (c == 'a')
