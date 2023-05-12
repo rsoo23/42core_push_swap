@@ -33,5 +33,7 @@ void	rotate(char c, int *stack_a, int *stack_b);
 void	rev_rotate(char c, int *stack_a, int *stack_b);
 // input_check.c
 int	input_check(int ac, char **av);
+// utils_1.c
+long long int	ft_atoi_ll(const char *str);
 
 #endif

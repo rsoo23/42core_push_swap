@@ -16,8 +16,8 @@ int	input_check(int ac, char **av)
 {
 	if (!ft_check_all_digits(ac, av))
 		return (0);
-	// if (!ft_check_num_size(ac, av))
-	// 	return (0);
+	if (!ft_check_num_size(ac, av))
+		return (0);
 	// if (!ft_check_num_dup(ac, av))
 	// 	return (0);
 	return (1);
