@@ -14,30 +14,33 @@
 
 int main(int ac, char **av)
 {
-	int *num_arr;
+	int *stack_a;
+	int	*stack_b;
 	int av_count;
 	int	i;
 	
 	av_count = 0;
 	if (ac > 1 && input_check(ac, av))
 	{
-		num_arr = malloc(ac * sizeof(int));
+		stack_a = malloc(ac * sizeof(int));
+		stack_b = malloc(ac * sizeof(int));
+		if (!stack_a || !stack_b)
+			return (NULL);
 		while (++av_count < ac)
-			num_arr[av_count] = ft_atoi(av[av_count]);
+			stack_a[av_count] = ft_atoi(av[av_count]);
 		// av_count = 0;
 		// while (++av_count < ac)
-		// 	printf("%d\n", num_arr[av_count]);
-		ft_push_swap(num_arr);
+		// 	printf("%d\n", stack_a[av_count]);
+		ft_push_swap(stack_a, stack_b);
 		return (0);
 	}
 	write(1, "Error\n", 6);
     return (0);
 }
 
-int	*ft_push_swap(int *sa)
+int	*ft_push_swap(int *stack_a, int *stack_b)
 {
-	int *sb;
 
-	free(sb);
-	return (sa)
+	free(stack_b);
+	return (stack_a)
 }
