@@ -42,6 +42,7 @@ void	rev_rotate(char stack_char, t_dlist **stack_a, t_dlist **stack_b);
 
 // utils_1.c
 long long int	ft_atoi_ll(const char *str);
+int				is_stack_sorted(t_dlist *stack);
 // doubly_linked_list_utils.c
 t_dlist	*create_stack_a(char **av);
 t_dlist	*ft_dlstnew(int num);

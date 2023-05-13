@@ -43,6 +43,11 @@ void	push_swap(int ac, t_dlist *stack_a)
 	// 	stack_a = stack_a-> next;
 	// }
 	// printf("ac: %d\n", ac);
+	if (is_stack_sorted(stack_a))
+	{
+		write(1, "Stack is already sorted\n", 24)
+		return ;
+	}
 	if (ac - 1 == 1)
 		return ;
 	else if (ac - 1 <= 5)
