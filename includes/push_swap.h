@@ -13,7 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include "libft/libft.h"
+#include "../libft/libft.h"
 #include <stdlib.h> // malloc, free, exit
 #include <unistd.h> // read, write
 // testing libraries
@@ -21,13 +21,13 @@
 
 typedef struct s_dlist
 {
-	int				*content;
-	struct s_stack	*next;
-	struct s_stack	*prev;
+	int				content;
+	struct s_dlist	*next;
+	struct s_dlist	*prev;
 }	t_dlist;
 
 // push_swap.c
-int		*push_swap(int *stack_a, int *stack_b);
+void	push_swap(int ac, t_dlist *stack_a);
 // operations.c
 void	swap(char c, int *stack_a, int *stack_b);
 void	push(char c, int *stack_a, int *stack_b);
@@ -35,15 +35,15 @@ void	rotate(char c, int *stack_a, int *stack_b);
 void	rev_rotate(char c, int *stack_a, int *stack_b);
 // input_check.c
 int		check_all_digits(int ac, char **av);
-int		check_num_size(int ac, char **av);
+int		check_num_size(char **av);
 int		lst_check_dup(t_dlist *stack_a);
 // utils_1.c
 long long int	ft_atoi_ll(const char *str);
 // doubly_linked_list_utils.c
-t_dlist	*create_stack_a(char **av, t_dlist *stack_a);
-t_dlist	*ft_dlstnew(int *content);
+t_dlist	*create_stack_a(char **av);
+t_dlist	*ft_dlstnew(int num);
 void	ft_dlstadd_back(t_dlist **lst, t_dlist *new);
 void	ft_dlstadd_front(t_dlist **lst, t_dlist *new);
-t_dlist	*ft_lstlast(t_dlist *lst);
+t_dlist	*ft_dlstlast(t_dlist *lst);
 
 #endif
