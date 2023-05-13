@@ -28,15 +28,18 @@ typedef struct s_dlist
 
 // push_swap.c
 void	push_swap(int ac, t_dlist *stack_a);
-// operations.c
-void	swap(char c, int *stack_a, int *stack_b);
-void	push(char c, int *stack_a, int *stack_b);
-void	rotate(char c, int *stack_a, int *stack_b);
-void	rev_rotate(char c, int *stack_a, int *stack_b);
 // input_check.c
 int		check_all_digits(int ac, char **av);
 int		check_num_size(char **av);
 int		lst_check_dup(t_dlist *stack_a);
+
+// operation_push_and_swap.c
+void	push(char stack_char, t_dlist **stack_a, t_dlist **stack_b);
+void	swap(char stack_char, t_dlist **stack_a, t_dlist **stack_b);
+// operation_rot_and_revrot.c
+void	rotate(char stack_char, t_dlist **stack_a, t_dlist **stack_b);
+void	rev_rotate(char stack_char, t_dlist **stack_a, t_dlist **stack_b);
+
 // utils_1.c
 long long int	ft_atoi_ll(const char *str);
 // doubly_linked_list_utils.c

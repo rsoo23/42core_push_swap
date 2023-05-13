@@ -43,6 +43,12 @@ void	push_swap(int ac, t_dlist *stack_a)
 	// 	stack_a = stack_a-> next;
 	// }
 	// printf("ac: %d\n", ac);
+	if (ac - 1 == 1)
+		return ;
+	else if (ac - 1 <= 5)
+		sort_small(stack_a);
+	else if (ac - 1 > 5)
+		sort_big(stack_a);
 }
 
 /*
@@ -56,7 +62,6 @@ main
 
 	5. pass stack a into push_swap
 
-ft_push_swap
-	6. initialise stack b (lstnew)
-	7. if stack a size <= 5 --> small sort, else big sort
+push_swap
+	6. if stack a size <= 5 --> small sort, else big sort
 */
