@@ -22,22 +22,6 @@ possible cases:
 vice versa for push_b
 */
 
-void	push(char stack_char, t_dlist **stack_a, t_dlist **stack_b)
-{
-	if (stack_char == 'a')
-	{
-		push_stack(stack_a, stack_b);
-		write(1, "pa\n", 3);
-	}
-	else if (stack_char == 'b')
-	{
-		push_stack(stack_b, stack_a);
-		write(1, "pb\n", 3);
-	}
-	else
-		return ;
-}
-
 static void	push_stack(t_dlist **stack_a, t_dlist **stack_b)
 {
 	t_dlist	*head_a;
@@ -58,27 +42,21 @@ static void	push_stack(t_dlist **stack_a, t_dlist **stack_b)
 	*stack_a = tail_b;
 }
 
-void	swap(char stack_char, t_dlist **stack_a, t_dlist **stack_b)
+void	push(char stack_char, t_dlist **stack_a, t_dlist **stack_b)
 {
 	if (stack_char == 'a')
 	{
-		swap_a(stack_a);
+		push_stack(stack_a, stack_b);
 		write(1, "pa\n", 3);
 	}
 	else if (stack_char == 'b')
 	{
-		swap_b(stack_b);
+		push_stack(stack_b, stack_a);
 		write(1, "pb\n", 3);
 	}
-	else if (stack_char == 's')
-	{
-		swap_a(stack_a);
-		swap_b(stack_b);
-		write(1, "ss\n", 3);
-	}
-	else
-		return ;
+	return ;
 }
+
 
 /*
 swap_a: (head is at the top)
@@ -97,7 +75,7 @@ static void	swap_a(t_dlist **stack_a)
 
 	head = *stack_a;
 	next_node = head->next;
-	if (*head = NULL || (*head)->next == NULL)
+	if (head->next == NULL)
 		return ;
 	head->prev = next_node;
 	head->next = next_node->next;
@@ -125,7 +103,7 @@ static void	swap_b(t_dlist **stack_b)
 
 	tail = ft_dlstlast(*stack_b);
 	prev_node = tail->prev;
-	if (*tail = NULL || (*tail)->prev == NULL)
+	if (tail->prev == NULL)
 		return ;
 	tail->prev = prev_node->prev;
 	tail->next = prev_node;
@@ -137,3 +115,23 @@ static void	swap_b(t_dlist **stack_b)
 		*stack_b = tail;
 }
 
+void	swap(char stack_char, t_dlist **stack_a, t_dlist **stack_b)
+{
+	if (stack_char == 'a')
+	{
+		swap_a(stack_a);
+		write(1, "pa\n", 3);
+	}
+	else if (stack_char == 'b')
+	{
+		swap_b(stack_b);
+		write(1, "pb\n", 3);
+	}
+	else if (stack_char == 's')
+	{
+		swap_a(stack_a);
+		swap_b(stack_b);
+		write(1, "ss\n", 3);
+	}
+	return ;
+}

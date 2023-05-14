@@ -12,30 +12,32 @@
 
 #include "../includes/push_swap.h"
 
-// cc -Wall -Wextra -Werror srcs/push_swap.c srcs/utils_1.c srcs/doubly_linked_list_utils.c 
-// srcs/input_check.c libft/ft_atoi.c libft/ft_isdigit.c -fsanitize=address -g3
-
+// cc -Wall -Wextra -Werror srcs/*.c libft/ft_atoi.c libft/ft_isdigit.c -fsanitize=address -g3
 int main(int ac, char **av)
 {
 	t_dlist	*stack_a;
+	t_dlist	*stack_b;
+	int		arr_size;
 
-	printf("check digit: %d, check size: %d\n", check_all_digits(ac, av), check_num_size(av));
-	if (ac > 1 && check_all_digits(ac, av) && check_num_size(av))
+	arr_size = ac - 1;
+	stack_a = NULL;
+	stack_b = NULL;
+	if (arr_size >= 1 && check_all_digits(ac, av) && check_num_size(av))
 	{
 		stack_a = create_stack_a(av);
-		if (!stack_a)
-			return (1);
 		if (lst_check_dup(stack_a))
-		{
-			push_swap(ac, stack_a);
-			return (0);
-		}
+			push_swap(arr_size, &stack_a, &stack_b);
+		else
+			write(2, "Error\n", 6);
 	}
-	write(1, "Error\n", 6);
+	else
+		write(2, "Error\n", 6);
+	free_stack(&stack_a);
+	free_stack(&stack_b);
     return (0);
 }
 
-void	push_swap(int ac, t_dlist *stack_a)
+void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 {
 	// while (stack_a)
 	// {
@@ -43,17 +45,15 @@ void	push_swap(int ac, t_dlist *stack_a)
 	// 	stack_a = stack_a-> next;
 	// }
 	// printf("ac: %d\n", ac);
-	if (is_stack_sorted(stack_a))
-	{
-		write(1, "Stack is already sorted\n", 24)
-		return ;
-	}
-	if (ac - 1 == 1)
-		return ;
-	else if (ac - 1 <= 5)
-		sort_small(stack_a);
-	else if (ac - 1 > 5)
-		sort_big(stack_a);
+	if (is_stack_sorted(*stack_a))
+		write(1, "Stack is already sorted\n", 24);
+	else if (arr_size == 2)
+		swap('a', stack_a, stack_b);
+	// else if (arr_size <= 5)
+	// 	sort_small(stack_a);
+	// else if (arr_size > 5)
+	// 	sort_big(stack_a);
+	return ;
 }
 
 /*

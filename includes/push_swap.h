@@ -27,7 +27,7 @@ typedef struct s_dlist
 }	t_dlist;
 
 // push_swap.c
-void	push_swap(int ac, t_dlist *stack_a);
+void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b);
 // input_check.c
 int		check_all_digits(int ac, char **av);
 int		check_num_size(char **av);
@@ -43,11 +43,11 @@ void	rev_rotate(char stack_char, t_dlist **stack_a, t_dlist **stack_b);
 // utils_1.c
 long long int	ft_atoi_ll(const char *str);
 int				is_stack_sorted(t_dlist *stack);
+void			free_stack(t_dlist **stack);
 // doubly_linked_list_utils.c
 t_dlist	*create_stack_a(char **av);
 t_dlist	*ft_dlstnew(int num);
 void	ft_dlstadd_back(t_dlist **lst, t_dlist *new);
-void	ft_dlstadd_front(t_dlist **lst, t_dlist *new);
 t_dlist	*ft_dlstlast(t_dlist *lst);
 
 #endif

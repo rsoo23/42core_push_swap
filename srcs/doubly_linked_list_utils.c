@@ -61,13 +61,6 @@ void	ft_dlstadd_back(t_dlist **lst, t_dlist *new)
 	new->next = NULL;
 }
 
-void	ft_dlstadd_front(t_dlist **lst, t_dlist *new)
-{
-	new-> next = *lst;
-	new-> prev = NULL;
-	*lst = new;
-}
-
 t_dlist	*ft_dlstlast(t_dlist *lst)
 {
 	if (!lst)

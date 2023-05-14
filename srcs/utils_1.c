@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:38:16 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/14 00:17:57 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/14 12:11:37 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,19 @@ int	is_stack_sorted(t_dlist *stack)
 		stack = stack->next;
 	}
 	return (1);
+}
+
+void	free_stack(t_dlist **stack)
+{
+	t_dlist	*temp;
+
+	if (!stack || !(*stack))
+		return ;
+	while (*stack)
+	{
+		temp = (*stack)->next;
+		free(*stack);
+		*stack = temp;
+	}
+	*stack = NULL;
 }
