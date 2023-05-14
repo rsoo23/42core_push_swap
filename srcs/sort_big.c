@@ -12,3 +12,21 @@
 
 #include "../includes/push_swap.h"
 
+/*
+
+5
+2                       1
+1                       6   5
+6                       3   2
+3                       4	(sb)
+4
+
+1. push two numbers     3. 
+   over to stack b
+   (pb pb)
+2. sb if needed
+	(sb)
+
+
+
+*/
