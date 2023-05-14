@@ -40,6 +40,10 @@ void	swap(char stack_char, t_dlist **stack_a, t_dlist **stack_b);
 void	rotate(char stack_char, t_dlist **stack_a, t_dlist **stack_b);
 void	rev_rotate(char stack_char, t_dlist **stack_a, t_dlist **stack_b);
 
+// sort_small.c
+void	sort_small(t_dlist **stack_a, t_dlist **stack_b);
+int		find_largest_num(t_dlist *stack);
+
 // utils_1.c
 long long int	ft_atoi_ll(const char *str);
 int				is_stack_sorted(t_dlist *stack);

@@ -39,18 +39,17 @@ int main(int ac, char **av)
 
 void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 {
-	// while (stack_a)
-	// {
-	// 	printf("%d\n", stack_a->content);
-	// 	stack_a = stack_a-> next;
-	// }
-	// printf("ac: %d\n", ac);
 	if (is_stack_sorted(*stack_a))
 		write(1, "Stack is already sorted\n", 24);
 	else if (arr_size == 2)
 		swap('a', stack_a, stack_b);
-	// else if (arr_size <= 5)
-	// 	sort_small(stack_a);
+	else if (arr_size == 3)
+		sort_small(stack_a, stack_b);
+	while (*stack_a)
+	{
+		printf("%d\n", (*stack_a)->content);
+		*stack_a = (*stack_a)-> next;
+	}
 	// else if (arr_size > 5)
 	// 	sort_big(stack_a);
 	return ;
