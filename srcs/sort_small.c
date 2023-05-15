@@ -42,7 +42,6 @@ void	sort_small(t_dlist **stack_a, t_dlist **stack_b)
 	int	largest_num;
 
 	largest_num = find_largest_num(*stack_a);
-	
 	if ((*stack_a)->content == largest_num)
 		rotate('a', stack_a, stack_b);
 	else if ((*stack_a)->next->content == largest_num)

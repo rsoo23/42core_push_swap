@@ -22,6 +22,7 @@
 typedef struct s_dlist
 {
 	int				content;
+	int				index;
 	struct s_dlist	*next;
 	struct s_dlist	*prev;
 }	t_dlist;

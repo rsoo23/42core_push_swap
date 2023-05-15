@@ -13,7 +13,7 @@
 #include "../includes/push_swap.h"
 
 // checks if all inputs consists of digits only ('-' sign also included)
-int check_all_digits(int ac, char **av)
+int	check_all_digits(int ac, char **av)
 {
 	int	i;
 	int	j;
@@ -25,7 +25,7 @@ int check_all_digits(int ac, char **av)
 		while (av[i][j])
 		{
 			if (j == 0 && av[i][0] == '-')
-				j++;	
+				j++;
 			if (!ft_isdigit(av[i][j]))
 				return (0);
 			j++;
@@ -35,7 +35,7 @@ int check_all_digits(int ac, char **av)
 }
 
 // check whether input number is within the int range
-int check_num_size(char **av)
+int	check_num_size(char **av)
 {
 	int				av_count;
 	long long int	num;
@@ -55,7 +55,7 @@ int	lst_check_dup(t_dlist *stack_a)
 {
 	t_dlist	*current;
 	t_dlist	*runner;
-	
+
 	current = stack_a;
 	while (current)
 	{

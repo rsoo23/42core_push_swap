@@ -12,8 +12,10 @@
 
 #include "../includes/push_swap.h"
 
-// cc -Wall -Wextra -Werror srcs/*.c libft/ft_atoi.c libft/ft_isdigit.c -fsanitize=address -g3
-int main(int ac, char **av)
+// cc -Wall -Wextra -Werror srcs/*.c libft/ft_atoi.c libft/ft_isdigit.c 
+// -fsanitize=address -g3
+
+int	main(int ac, char **av)
 {
 	t_dlist	*stack_a;
 	t_dlist	*stack_b;
@@ -32,7 +34,7 @@ int main(int ac, char **av)
 		write(2, "Error\n", 6);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
-    return (0);
+	return (0);
 }
 
 void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)

@@ -12,7 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-
 /*
 rotate a: (put head under)
 				top of stack
@@ -32,7 +31,7 @@ static void	rotate_a(t_dlist **stack)
 	if (head->next == NULL)
 		return ;
 	tail = ft_dlstlast(*stack);
-	tail->next = head;  
+	tail->next = head;
 	head->next->prev = NULL;
 	*stack = head->next;
 	head->prev = tail;

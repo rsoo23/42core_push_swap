@@ -57,7 +57,6 @@ void	push(char stack_char, t_dlist **stack_a, t_dlist **stack_b)
 	return ;
 }
 
-
 /*
 swap_a: (head is at the top)
  NULL<-node1->node2		 [NULL]<-node2->[node1]
@@ -70,8 +69,8 @@ node2: next_node
 
 static void	swap_a(t_dlist **stack_a)
 {
-	t_dlist *head;
-	t_dlist *next_node;
+	t_dlist	*head;
+	t_dlist	*next_node;
 
 	head = *stack_a;
 	next_node = head->next;
@@ -98,8 +97,8 @@ node3: tail
 
 static void	swap_b(t_dlist **stack_b)
 {
-	t_dlist *prev_node;
-	t_dlist *tail;
+	t_dlist	*prev_node;
+	t_dlist	*tail;
 
 	tail = ft_dlstlast(*stack_b);
 	prev_node = tail->prev;
@@ -108,7 +107,7 @@ static void	swap_b(t_dlist **stack_b)
 	tail->prev = prev_node->prev;
 	tail->next = prev_node;
 	prev_node->prev = tail;
-	prev_node->next = NULL; 
+	prev_node->next = NULL;
 	if (tail->prev != NULL)
 		tail->prev->next = tail;
 	else

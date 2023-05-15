@@ -38,9 +38,10 @@ t_dlist	*ft_dlstnew(int num)
 	new_elem = malloc(sizeof(t_dlist));
 	if (!new_elem)
 		return (0);
-	new_elem-> content = num;
-	new_elem-> next = NULL;
-	new_elem-> prev = NULL;
+	new_elem -> content = num;
+	new_elem -> index = 0;
+	new_elem -> next = NULL;
+	new_elem -> prev = NULL;
 	return (new_elem);
 }
 
