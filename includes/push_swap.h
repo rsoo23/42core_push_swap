@@ -27,6 +27,15 @@ typedef struct s_dlist
 	struct s_dlist	*prev;
 }	t_dlist;
 
+typedef struct s_sortbig
+{
+	int	size_b;
+	int	pos;
+	int	midpoint;
+	int	rot_num;
+	int	rev_rot_num;
+}	t_sortbig;
+
 // push_swap.c
 void			push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b);
 // input_check.c
@@ -46,7 +55,7 @@ void			sort_small(t_dlist **stack_a, t_dlist **stack_b);
 int				find_largest_num(t_dlist *stack);
 
 // sort_big.c
-void			sort_big(t_dlist **stack_a, int arr_size);
+void			sort_big(t_dlist **stack_a, t_dlist **stack_b, int arr_size);
 void			assign_index(t_dlist **stack, int arr_size);
 
 // utils_1.c

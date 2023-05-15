@@ -48,12 +48,12 @@ void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 	else if (arr_size == 3)
 		sort_small(stack_a, stack_b);
 	else if (arr_size > 3)
-		sort_big(stack_a, arr_size);
-	// while (*stack_a)
-	// {
-	// 	printf("%d\n", (*stack_a)->content);
-	// 	*stack_a = (*stack_a)-> next;
-	// }
+		sort_big(stack_a, stack_b, arr_size);
+	while (*stack_a)
+	{
+		printf("%d\n", (*stack_a)->content);
+		*stack_a = (*stack_a)-> next;
+	}
 	return ;
 }
 

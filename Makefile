@@ -30,7 +30,7 @@ LIBFT_DIR = /libft
 # Bonus Variables
 BONUS_NAME = checker
 
-BONUS_DIR = /bonus
+BONUS_DIR = /bonus_srcs
 BONUS_FILES = push_swap
 BONUS_C_FILES = $(addprefix $(BONUS_DIR), $(addsuffix .c, $(BONUS_FILES)))
 
