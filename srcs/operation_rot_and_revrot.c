@@ -64,19 +64,19 @@ static void	rotate_b(t_dlist **stack)
 	*stack = tail;
 }
 
-void	rotate(char stack_char, t_dlist **stack_a, t_dlist **stack_b)
+void	rotate(char stack, t_dlist **stack_a, t_dlist **stack_b)
 {
-	if (stack_char == 'a')
+	if (stack == 'a')
 	{
 		rotate_a(stack_a);
 		write(1, "ra\n", 3);
 	}
-	else if (stack_char == 'b')
+	else if (stack == 'b')
 	{
 		rotate_b(stack_b);
 		write(1, "rb\n", 3);
 	}
-	else if (stack_char == 'r')
+	else if (stack == 'r')
 	{
 		rotate_a(stack_a);
 		rotate_b(stack_b);
@@ -85,19 +85,19 @@ void	rotate(char stack_char, t_dlist **stack_a, t_dlist **stack_b)
 	return ;
 }
 
-void	rev_rotate(char stack_char, t_dlist **stack_a, t_dlist **stack_b)
+void	rev_rotate(char stack, t_dlist **stack_a, t_dlist **stack_b)
 {
-	if (stack_char == 'a')
+	if (stack == 'a')
 	{
 		rotate_b(stack_a);
 		write(1, "rra\n", 4);
 	}
-	else if (stack_char == 'b')
+	else if (stack == 'b')
 	{
 		rotate_a(stack_b);
 		write(1, "rrb\n", 4);
 	}
-	else if (stack_char == 'r')
+	else if (stack == 'r')
 	{
 		rotate_a(stack_a);
 		rotate_b(stack_b);

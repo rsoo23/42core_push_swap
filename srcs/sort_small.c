@@ -30,7 +30,7 @@ int	find_largest_num(t_dlist *stack)
 	largest_num = -2147483648;
 	while (stack)
 	{
-		if (stack->content > largest_num)
+		if (stack->content > largest_num && stack->index == 0)
 			largest_num = stack->content;
 		stack = stack->next;
 	}

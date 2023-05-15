@@ -42,14 +42,14 @@ static void	push_stack(t_dlist **stack_a, t_dlist **stack_b)
 	*stack_a = tail_b;
 }
 
-void	push(char stack_char, t_dlist **stack_a, t_dlist **stack_b)
+void	push(char stack, t_dlist **stack_a, t_dlist **stack_b)
 {
-	if (stack_char == 'a')
+	if (stack == 'a')
 	{
 		push_stack(stack_a, stack_b);
 		write(1, "pa\n", 3);
 	}
-	else if (stack_char == 'b')
+	else if (stack == 'b')
 	{
 		push_stack(stack_b, stack_a);
 		write(1, "pb\n", 3);
@@ -114,19 +114,19 @@ static void	swap_b(t_dlist **stack_b)
 		*stack_b = tail;
 }
 
-void	swap(char stack_char, t_dlist **stack_a, t_dlist **stack_b)
+void	swap(char stack, t_dlist **stack_a, t_dlist **stack_b)
 {
-	if (stack_char == 'a')
+	if (stack == 'a')
 	{
 		swap_a(stack_a);
-		write(1, "pa\n", 3);
+		write(1, "sa\n", 3);
 	}
-	else if (stack_char == 'b')
+	else if (stack == 'b')
 	{
 		swap_b(stack_b);
-		write(1, "pb\n", 3);
+		write(1, "sb\n", 3);
 	}
-	else if (stack_char == 's')
+	else if (stack == 's')
 	{
 		swap_a(stack_a);
 		swap_b(stack_b);

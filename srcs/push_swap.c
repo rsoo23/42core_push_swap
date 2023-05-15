@@ -25,11 +25,13 @@ int	main(int ac, char **av)
 	stack_a = NULL;
 	stack_b = NULL;
 	if (arr_size >= 1 && check_all_digits(ac, av) && check_num_size(av))
+	{
 		stack_a = create_stack_a(av);
-	else
-		write(2, "Error\n", 6);
-	if (lst_check_dup(stack_a))
-		push_swap(arr_size, &stack_a, &stack_b);
+		if (lst_check_dup(stack_a))
+			push_swap(arr_size, &stack_a, &stack_b);
+		else
+			write(2, "Error\n", 6);
+	}
 	else
 		write(2, "Error\n", 6);
 	free_stack(&stack_a);
@@ -46,7 +48,7 @@ void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 	else if (arr_size == 3)
 		sort_small(stack_a, stack_b);
 	else if (arr_size > 3)
-		sort_big(stack_a);
+		sort_big(stack_a, arr_size);
 	// while (*stack_a)
 	// {
 	// 	printf("%d\n", (*stack_a)->content);
