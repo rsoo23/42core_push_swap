@@ -23,14 +23,14 @@ Possible sorting steps:
 2			1
 */
 
-int	find_largest_num(t_dlist *stack)
+static int	find_largest_num_small(t_dlist *stack)
 {
 	int	largest_num;
 
 	largest_num = -2147483648;
 	while (stack)
 	{
-		if (stack->content > largest_num && stack->index == 0)
+		if (stack->content > largest_num)
 			largest_num = stack->content;
 		stack = stack->next;
 	}
@@ -39,13 +39,13 @@ int	find_largest_num(t_dlist *stack)
 
 void	sort_small(t_dlist **stack_a, t_dlist **stack_b)
 {
-	int	largest_num;
+	int		largest_num;
 
-	largest_num = find_largest_num(*stack_a);
+	largest_num = find_largest_num_small(*stack_a);
 	if ((*stack_a)->content == largest_num)
 		rotate('a', stack_a, stack_b);
 	else if ((*stack_a)->next->content == largest_num)
 		rev_rotate('a', stack_a, stack_b);
-	if (!is_stack_sorted(*stack_a))
+	if (!is_stack_sorted((*stack_a)))
 		swap('a', stack_a, stack_b);
 }

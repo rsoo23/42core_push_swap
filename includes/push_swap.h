@@ -31,9 +31,7 @@ typedef struct s_sortbig
 {
 	int	size_b;
 	int	pos;
-	int	midpoint;
-	int	rot_num;
-	int	rev_rot_num;
+	int	search;
 }	t_sortbig;
 
 // push_swap.c
@@ -43,20 +41,18 @@ int				check_all_digits(int ac, char **av);
 int				check_num_size(char **av);
 int				lst_check_dup(t_dlist *stack_a);
 
-// operation_push_and_swap.c
-void			push(char stack, t_dlist **stack_a, t_dlist **stack_b);
+// operation_swap.c
 void			swap(char stack, t_dlist **stack_a, t_dlist **stack_b);
+// operation_push.c
+void			push(char stack, t_dlist **stack_a, t_dlist **stack_b);
 // operation_rot_and_revrot.c
 void			rotate(char stack, t_dlist **stack_a, t_dlist **stack_b);
 void			rev_rotate(char stack, t_dlist **stack_a, t_dlist **stack_b);
 
 // sort_small.c
 void			sort_small(t_dlist **stack_a, t_dlist **stack_b);
-int				find_largest_num(t_dlist *stack);
-
 // sort_big.c
 void			sort_big(t_dlist **stack_a, t_dlist **stack_b, int arr_size);
-void			assign_index(t_dlist **stack, int arr_size);
 
 // utils_1.c
 long long int	ft_atoi_ll(const char *str);

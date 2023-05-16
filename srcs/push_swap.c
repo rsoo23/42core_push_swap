@@ -41,6 +41,8 @@ int	main(int ac, char **av)
 
 void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 {
+	int i = 0;
+
 	if (is_stack_sorted(*stack_a))
 		write(1, "Stack is already sorted\n", 24);
 	else if (arr_size == 2)
@@ -51,8 +53,9 @@ void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 		sort_big(stack_a, stack_b, arr_size);
 	while (*stack_a)
 	{
-		printf("%d\n", (*stack_a)->content);
-		*stack_a = (*stack_a)-> next;
+		i++;
+		printf("%d:%d\n", i, (*stack_a)->content);
+		*stack_a = (*stack_a)->next;
 	}
 	return ;
 }

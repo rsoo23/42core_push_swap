@@ -13,51 +13,6 @@
 #include "../includes/push_swap.h"
 
 /*
-take the top num from stack_b (tail), push it to the top of stack_a (head)
-possible cases:
-	- [x] stack a is empty
-	- [x] stack b is empty
-	- [x] only one node in stack b
-
-vice versa for push_b
-*/
-
-static void	push_stack(t_dlist **stack_a, t_dlist **stack_b)
-{
-	t_dlist	*head_a;
-	t_dlist	*tail_b;
-
-	if (*stack_b == NULL)
-		return ;
-	head_a = *stack_a;
-	tail_b = ft_dlstlast(*stack_b);
-	if (tail_b->prev != NULL)
-		tail_b->prev->next = NULL;
-	else
-		*stack_b = NULL;
-	tail_b->prev = NULL;
-	tail_b->next = head_a;
-	if (head_a != NULL)
-		head_a->prev = tail_b;
-	*stack_a = tail_b;
-}
-
-void	push(char stack, t_dlist **stack_a, t_dlist **stack_b)
-{
-	if (stack == 'a')
-	{
-		push_stack(stack_a, stack_b);
-		write(1, "pa\n", 3);
-	}
-	else if (stack == 'b')
-	{
-		push_stack(stack_b, stack_a);
-		write(1, "pb\n", 3);
-	}
-	return ;
-}
-
-/*
 swap_a: (head is at the top)
  NULL<-node1->node2		 [NULL]<-node2->[node1]
 node1<-node2->node3		[node2]<-node1->[node3]
