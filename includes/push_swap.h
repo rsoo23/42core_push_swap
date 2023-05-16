@@ -27,9 +27,12 @@ typedef struct s_dlist
 
 typedef struct s_sortbig
 {
+	int	size_a;
 	int	size_b;
 	int	pos;
+	int	midpoint;
 	int	search;
+	int rev_rot_count;
 }	t_sortbig;
 
 // push_swap.c

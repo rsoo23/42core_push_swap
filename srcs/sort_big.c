@@ -12,11 +12,14 @@
 
 #include "../includes/push_swap.h"
 
-static void	init_info(t_sortbig *info)
+static void	init_info(t_sortbig *info, int size_a)
 {
+	info->size_a = size_a;
 	info->size_b = 0;
 	info->pos = 0;
+	info->midpoint = info->size_a / 2;
 	info->search = 1;
+	info->rev_rot_count = info->size_a - info->pos;
 }
 
 static int	find_largest_num_big(t_dlist *stack)
@@ -51,49 +54,40 @@ static void	assign_index(t_dlist **stack, int arr_size)
 			}
 			head = head->next;
 		}
-		// printf("%d:%d\n", (head)->index, (head)->content);
 		arr_size--;
 	}
+}
+
+static void find_num_rot_push(t_dlist **stack_a, t_dlist **stack_b, t_sortbig *info)
+{
+	info->pos = 0;
+	while ((*stack_a) && info->search != (*stack_a)->index)
+	{
+		info->pos++;
+		(*stack_a) = (*stack_a)->next;
+	}
+	if (info->pos >= info->midpoint)
+		while (info->rev_rot_count-- > 0)
+			rev_rotate('a', stack_a, stack_b);
+	else if (info->pos < info->midpoint)
+		while (info->pos-- > 0)
+			rotate('a', stack_a, stack_b);
+	push('b', stack_a, stack_b);
+	info->size_b++;
+	info->search++;
 }
 
 void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 {
 	t_sortbig	*info;
-	t_dlist		*head;
-	int			rev_rot_count;
-	int			midpoint;
 
 	info = malloc(sizeof(t_sortbig));
-	init_info(info);
+	init_info(info, size_a);
 	assign_index(stack_a, size_a);
-	// while (*stack_a)
-	// {
-	// 	printf("%d\n", (*stack_a)->content);
-	// 	*stack_a = (*stack_a)->next;
-	// }
-	while (size_a > 3)
+	while (info->size_a > 3)
 	{
-		midpoint = size_a / 2;
-		head = *stack_a;
-		info->pos = 0;
-		while (head && info->search != head->index)
-		{
-			info->pos++;
-			head = head->next;
-		}
-		// printf("pos:%d of %d, mid:%d\n", info->pos, info->search, midpoint);
-		rev_rot_count = size_a - info->pos;
-		// printf("pos:%d, mid:%d\n", info->pos, midpoint);
-		if (info->pos >= midpoint)
-			while (rev_rot_count-- > 0)
-				rev_rotate('a', stack_a, stack_b);
-		else if (info->pos < midpoint)
-			while (info->pos-- > 0)
-				rotate('a', stack_a, stack_b);
-		push('b', stack_a, stack_b);
-		size_a--;
-		info->size_b++;
-		info->search++;
+		find_num_rot_push(stack_a, stack_b, info);
+		info->size_a--;
 	}
 	sort_small(stack_a, stack_b);
 	while (info->size_b-- > 0)

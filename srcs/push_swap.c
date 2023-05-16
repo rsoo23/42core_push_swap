@@ -24,16 +24,17 @@ int	main(int ac, char **av)
 	arr_size = ac - 1;
 	stack_a = NULL;
 	stack_b = NULL;
-	if (arr_size >= 1 && check_all_digits(ac, av) && check_num_size(av))
+	if (arr_size >= 1)
 	{
-		stack_a = create_stack_a(av);
+		if (check_all_digits(ac, av) && check_num_size(av))
+			stack_a = create_stack_a(av);
+		else
+			write(2, "Error\n", 6);
 		if (lst_check_dup(stack_a))
 			push_swap(arr_size, &stack_a, &stack_b);
 		else
 			write(2, "Error\n", 6);
 	}
-	else
-		write(2, "Error\n", 6);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);
@@ -44,7 +45,7 @@ void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 	// int i = 0;
 
 	if (is_stack_sorted(*stack_a))
-		write(1, "Stack is already sorted\n", 24);
+		return ;
 	else if (arr_size == 2)
 		swap('a', stack_a, stack_b);
 	else if (arr_size == 3)
