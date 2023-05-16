@@ -15,17 +15,19 @@ NAME = push_swap
 CC = gcc 
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
+INCLUDES = includes/push_swap.h
 
 # c files in srcs
-SRCS_DIR = /srcs
-SRCS_FILES = push_swap
+SRCS_DIR = srcs/
+SRCS_FILES = doubly_linked_list_utils input_check operation_push \
+				operation_rot_revrot operation_swap push_swap \
+				sort_big sort_small utils_1
 C_FILES = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 # obj files: /objs will be created to store the obj files
-OBJS_DIR = /objs
 OBJ_FILES = $(C_FILES:.c=.o)
 
+LIBFT_DIR = libft
 LIBFT = libft.a
-LIBFT_DIR = /libft
 
 # Bonus Variables
 BONUS_NAME = checker
@@ -36,34 +38,25 @@ BONUS_C_FILES = $(addprefix $(BONUS_DIR), $(addsuffix .c, $(BONUS_FILES)))
 
 BONUS_OBJ_FILES = $(BONUS_C_FILES:.c=.o)
 
-# making directory (More info at notes below)
-MKDIR = mkdir -p
-
 # Other utilities:
 # object file creation
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-libft:
+all: $(NAME)
+
+$(NAME): $(OBJ_FILES)
 	make -C $(LIBFT_DIR)
+	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(NAME) $(LIBFT_DIR)/$(LIBFT)
 
-all:
-	$(MKDIR) $(OBJS_DIR)
-	make libft $(NAME)
-
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(LIBFT_DIR)/$(LIBFT) $(OBJS) -o $(NAME)
-
-bonus:
-	$(MKDIR) $(OBJS_DIR)
-	make libft $(BONUS_NAME)
+bonus: $(NAME) $(BONUS_NAME)
 
 $(BONUS_NAME): $(BONUS_OBJS)
-	$(CC) $(CFLAGS) $(LIBFT_DIR)/$(LIBFT) $(BONUS_OBJS) -o $(BONUS_NAME)
+	$(CC) $(CFLAGS) $(BONUS_OBJS) -o $(BONUS_NAME) $(LIBFT)
 
 # cleaning, re, phony
 clean:
-	$(RM) $(OBJS_DIR)
+	$(RM) $(OBJ_FILES)
 	make clean -C $(LIBFT_DIR)
 
 fclean: clean

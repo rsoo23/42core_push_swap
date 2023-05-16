@@ -14,10 +14,8 @@
 # define PUSH_SWAP_H
 
 # include "../libft/libft.h"
-# include <stdlib.h> // malloc, free, exit
-# include <unistd.h> // read, write
 // testing libraries
-# include <stdio.h>
+// # include <stdio.h>
 
 typedef struct s_dlist
 {
@@ -45,7 +43,7 @@ int				lst_check_dup(t_dlist *stack_a);
 void			swap(char stack, t_dlist **stack_a, t_dlist **stack_b);
 // operation_push.c
 void			push(char stack, t_dlist **stack_a, t_dlist **stack_b);
-// operation_rot_and_revrot.c
+// operation_rot_revrot.c
 void			rotate(char stack, t_dlist **stack_a, t_dlist **stack_b);
 void			rev_rotate(char stack, t_dlist **stack_a, t_dlist **stack_b);
 
