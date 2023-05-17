@@ -38,13 +38,13 @@ int	check_all_digits(int ac, char **av)
 int	check_num_size(char **av)
 {
 	int				av_count;
-	long long int	num;
+	long	num;
 
 	av_count = 0;
 	num = 0;
 	while (av[++av_count])
 	{
-		num = ft_atoi_ll(av[av_count]);
+		num = ft_atoi_long(av[av_count]);
 		if (num > 2147483647 || num < -2147483648)
 			return (0);
 	}

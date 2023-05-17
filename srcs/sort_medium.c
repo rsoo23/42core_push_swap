@@ -19,6 +19,9 @@ void	init_info(t_sortbig *info, int size_a)
 	info->pos = 0;
 	info->midpoint = info->size_a / 2;
 	info->search = 1;
+	info->part = 1;
+	info->top_pos = 0;
+	info->bot_pos = 1;
 }
 
 int	find_largest_num(t_dlist *stack)
@@ -60,10 +63,10 @@ void	assign_index(t_dlist **stack, int arr_size)
 	// printf("index %d is in pos %d\n", info->search, info->pos);
 	// printf("mid: %d, rrcount: %d\n", info->midpoint, rev_rot_count);
 
-void	find_num_rp(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+void	find_num_rot_medium(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
-	t_dlist	*head;
 	int		rev_rot_count;
+	t_dlist	*head;
 
 	head = *stack_a;
 	info->pos = 0;
@@ -79,9 +82,6 @@ void	find_num_rp(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 	else if (info->pos < info->midpoint)
 		while (info->pos-- > 0)
 			rotate('a', stack_a, stack_b);
-	push('b', stack_a, stack_b);
-	info->size_b++;
-	info->search++;
 }
 
 void	sort_medium(t_dlist **stack_a, t_dlist **stack_b, int size_a)
@@ -93,7 +93,10 @@ void	sort_medium(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 	assign_index(stack_a, size_a);
 	while (info->size_a > 3)
 	{
-		find_num_rp(stack_a, stack_b, info);
+		find_num_rot_medium(stack_a, stack_b, info);
+		push('b', stack_a, stack_b);
+		info->size_b++;
+		info->search++;
 		info->size_a--;
 	}
 	sort_small(stack_a, stack_b);
