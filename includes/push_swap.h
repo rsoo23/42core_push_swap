@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 // testing libraries
-// # include <stdio.h>
+# include <stdio.h>
 
 typedef struct s_dlist
 {
@@ -25,15 +25,14 @@ typedef struct s_dlist
 	struct s_dlist	*prev;
 }	t_dlist;
 
-typedef struct s_sortbig
+typedef struct s_info
 {
 	int	size_a;
 	int	size_b;
 	int	pos;
 	int	midpoint;
 	int	search;
-	int rev_rot_count;
-}	t_sortbig;
+}	t_info;
 
 // push_swap.c
 void			push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b);
@@ -52,8 +51,13 @@ void			rev_rotate(char stack, t_dlist **stack_a, t_dlist **stack_b);
 
 // sort_small.c
 void			sort_small(t_dlist **stack_a, t_dlist **stack_b);
+// sort_medium.c
+void			sort_medium(t_dlist **stack_a, t_dlist **stack_b, int arr_size);
+void			find_num_rp(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
+void			assign_index(t_dlist **stack, int arr_size);
+int				find_largest_num(t_dlist *stack);
+void			init_info(t_sortbig *info, int size_a);
 // sort_big.c
-void			sort_big(t_dlist **stack_a, t_dlist **stack_b, int arr_size);
 
 // utils_1.c
 long long int	ft_atoi_ll(const char *str);

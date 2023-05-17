@@ -13,7 +13,7 @@
 # Mandatory Variables
 NAME = push_swap
 CC = gcc 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 RM = rm -rf
 INCLUDES = includes/push_swap.h
 

@@ -42,7 +42,7 @@ int	main(int ac, char **av)
 
 void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 {
-	// int i = 0;
+	int i = 0;
 
 	if (is_stack_sorted(*stack_a))
 		return ;
@@ -50,14 +50,16 @@ void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 		swap('a', stack_a, stack_b);
 	else if (arr_size == 3)
 		sort_small(stack_a, stack_b);
-	else if (arr_size > 3)
+	else if (arr_size <= 5)
+		sort_medium(stack_a, stack_b, arr_size);
+	else
 		sort_big(stack_a, stack_b, arr_size);
-	// while (*stack_a)
-	// {
-	// 	i++;
-	// 	printf("%d:%d\n", i, (*stack_a)->content);
-	// 	*stack_a = (*stack_a)->next;
-	// }
+	while (*stack_a)
+	{
+		i++;
+		printf("%d:%d\n", i, (*stack_a)->content);
+		*stack_a = (*stack_a)->next;
+	}
 	return ;
 }
 
