@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/17 10:41:05 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/17 14:04:23 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,43 @@
 
 void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 {
-	t_dlist	*head;
-	t_dlist	*tail;
+	t_dlist		*head;
+	t_dlist		*tail;
+	static int	i;
 
 	head = stack_a;
 	tail = ft_dlstlast(stack_a);
-	info->top_pos = 0;
-	info->bot_pos = 1;
 	while (head)
 	{
-		if (head->index >= (10 * info->part - 9) \
-		&& head->index <= 10 * info->part)
+		if (head->index > info->part * i && head->index <= info->part * (i + 1))
 			break ;
 		info->top_pos++;
 		head = head->next;
+		if (info->top_pos + 1 == info->size_a)
+			i++;
 	}
 	while (tail)
 	{
-		if (head->index >= (10 * info->part - 9) \
-		&& head->index <= 10 * info->part)
+		if (head->index > info->part * i && head->index <= info->part * (i + 1))
 			break ;
 		info->bot_pos++;
 		tail = tail->prev;
 	}
 }
 
-void	find_num_rot_big(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+void	rot_a_num_to_head(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
-	if (info->bot_pos < info->top_pos)
+	if (info->bot_pos <= info->top_pos)
 		while (info->bot_pos-- > 0)
 			rev_rotate('a', stack_a, stack_b);
 	else if (info->bot_pos > info->top_pos)
 		while (info->pos-- > 0)
 			rotate('a', stack_a, stack_b);
+}
+
+void	rot_b_to_correct_pos(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+{
+	
 }
 
 void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
@@ -56,10 +60,16 @@ void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 	info = malloc(sizeof(t_info));
 	init_info(info, size_a);
 	assign_index(stack_a, size_a);
+	info->part = size_a / 5;
 	while (info->size_a > 3)
 	{
+		info->top_pos = 0;
+		info->bot_pos = 1;
 		find_top_bottom_index(*stack_a, info);
-		find_num_rot_big(stack_a, stack_b, info);
+		rot_a_num_to_head(stack_a, stack_b, info);
+		rot_b_to_correct_pos(stack_a, stack, info);
+		push('b', stack_a, stack_b);
+		info->size_b++;
 		info->size_a--;
 	}
 	sort_small(stack_a, stack_b);
