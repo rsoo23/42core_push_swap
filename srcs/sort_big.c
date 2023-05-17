@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/17 14:04:23 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/17 21:56:55 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,19 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 
 void	rot_a_num_to_head(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
-	if (info->bot_pos <= info->top_pos)
-		while (info->bot_pos-- > 0)
-			rev_rotate('a', stack_a, stack_b);
-	else if (info->bot_pos > info->top_pos)
+	if (info->bot_pos >= info->top_pos)
 		while (info->pos-- > 0)
 			rotate('a', stack_a, stack_b);
+	else if (info->bot_pos < info->top_pos)
+		while (info->bot_pos-- > 0)
+			rev_rotate('a', stack_a, stack_b);
 }
 
 void	rot_b_to_correct_pos(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
-	
+	if (info->size_b == 0 || info->size_b == 1) 
+		return ;
+		
 }
 
 void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
@@ -67,7 +69,7 @@ void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 		info->bot_pos = 1;
 		find_top_bottom_index(*stack_a, info);
 		rot_a_num_to_head(stack_a, stack_b, info);
-		rot_b_to_correct_pos(stack_a, stack, info);
+		rot_b_to_correct_pos(stack_a, stack_b, info);
 		push('b', stack_a, stack_b);
 		info->size_b++;
 		info->size_a--;

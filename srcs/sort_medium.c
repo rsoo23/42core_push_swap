@@ -76,12 +76,12 @@ void	find_num_rot_medium(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 		head = head->next;
 	}
 	rev_rot_count = info->size_a - info->pos;
-	if (info->pos >= info->midpoint)
-		while (rev_rot_count-- > 0)
-			rev_rotate('a', stack_a, stack_b);
-	else if (info->pos < info->midpoint)
+	if (info->pos <= info->midpoint)
 		while (info->pos-- > 0)
 			rotate('a', stack_a, stack_b);
+	else if (info->pos > info->midpoint)
+		while (rev_rot_count-- > 0)
+			rev_rotate('a', stack_a, stack_b);
 }
 
 void	sort_medium(t_dlist **stack_a, t_dlist **stack_b, int size_a)
