@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/18 14:11:06 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/18 15:43:12 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 			break ;
 		info->top_pos++;
 		head = head->next;
-		if (info->top_pos + 1 == info->size_a)
-			i++;
+	}
+	if (info->top_pos + 1 == info->size_a)
+	{
+		i++;
+		return ;
 	}
 	while (tail)
 	{
@@ -48,19 +51,26 @@ void	rot_a_num_to_head(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 			rev_rotate('a', stack_a, stack_b);
 }
 
-void	rot_b_to_tail(int head_index_a, t_dlist **stack_a, t_dlist **stack_b)
+void	rot_prev_to_tail(int head_index_a, t_dlist **stack_a, t_dlist **stack_b)
 {
+	int		min_pos_diff;
+	int		diff;
 	int		rot_b_count;
 	t_dlist	*tail_b;
 
 	tail_b = ft_dlstlast(*stack_b);
 	rot_b_count = 0;
+	min_pos_diff = 2147483647;
 	while (tail_b)
-	{	
-		if (head_index_a - tail_b->index == 1)
-			break ;
-		else (head_index_a - tail_b->index > 1)
-			break ;
+	{
+		diff = head_index_a - tail_b->index;
+		if (diff < min_pos_diff && diff > 0)
+			min_pos_diff = diff;
+		tail_b = tail_b->prev;
+	}
+	tail_b = ft_dlstlast(*stack_b);
+	while (tail_b && tail_b->index != head_index_a - min_pos_diff)
+	{
 		tail_b = tail_b->prev;
 		rot_b_count++;
 	}
@@ -71,27 +81,19 @@ void	rot_b_to_tail(int head_index_a, t_dlist **stack_a, t_dlist **stack_b)
 void	push_b_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
 	if (info->size_b == 0 || check_bigger_than_all((*stack_a)->index, *stack_b))
-	{
 		push('b', stack_a, stack_b);
-		write(1, "\n", 1);
-	}
 	else if (check_smaller_than_all((*stack_a)->index, *stack_b))
 	{
 		push('b', stack_a, stack_b);
-		write(1, "\n", 1);
 		rotate('b', stack_a, stack_b);
 	}
 	else
 	{
-		write(1, "\n", 1);
-		rot_b_to_tail((*stack_a)->index, stack_a, stack_b);
+		rot_prev_to_tail((*stack_a)->index, stack_a, stack_b);
 		push('b', stack_a, stack_b);
 	}
 	while ((*stack_b)->index == ft_dlstlast(*stack_b)->index + 1)
-	{
 		rev_rotate('b', stack_a, stack_b);
-		write(1, "\n", 1);
-	}
 	return ;
 }
 
