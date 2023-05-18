@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-void	init_info(t_sortbig *info, int size_a)
+void	init_info(t_info *info, int size_a)
 {
 	info->size_a = size_a;
 	info->size_b = 0;
@@ -46,7 +46,7 @@ void	assign_index(t_dlist **stack, int arr_size)
 	while (arr_size >= 1)
 	{
 		head = *stack;
-		largest_num = find_largest_num_big(head);
+		largest_num = find_largest_num(head);
 		while (head)
 		{
 			if (head->content == largest_num && head->index == 0)

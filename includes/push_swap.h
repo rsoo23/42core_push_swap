@@ -59,9 +59,13 @@ void	sort_medium(t_dlist **stack_a, t_dlist **stack_b, int arr_size);
 void	find_num_rot_medium(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
 void	assign_index(t_dlist **stack, int arr_size);
 int		find_largest_num(t_dlist *stack);
-void	init_info(t_sortbig *info, int size_a);
+void	init_info(t_info *info, int size_a);
 // sort_big.c
+void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a);
 void	find_top_bottom_index(t_dlist *stack_a, t_info *info);
+// sort_big_utils.c
+int		check_bigger_than_all(int head_index_a, t_dlist *stack_b);
+int		check_smaller_than_all(int head_index_a, t_dlist *stack_b);
 
 // utils_1.c
 long	ft_atoi_long(const char *str);

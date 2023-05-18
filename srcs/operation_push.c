@@ -42,20 +42,20 @@ static void	push_a(t_dlist **stack_a, t_dlist **stack_b)
 	*stack_a = tail_b;
 }
 
-static void push_b(t_dlist **stack_a, t_dlist **stack_b)
+static void	push_b(t_dlist **stack_a, t_dlist **stack_b)
 {
 	t_dlist	*head_a;
 	t_dlist	*tail_b;
 
-    if (*stack_a == NULL)
-        return ;
-    head_a = *stack_a;
+	if (*stack_a == NULL)
+		return ;
+	head_a = *stack_a;
 	tail_b = ft_dlstlast(*stack_b);
 	if (head_a->next != NULL)
 		head_a->next->prev = NULL;
 	else
 		*stack_a = NULL;
-    *stack_a = head_a->next;
+	*stack_a = head_a->next;
 	head_a->prev = tail_b;
 	head_a->next = NULL;
 	if (tail_b != NULL)

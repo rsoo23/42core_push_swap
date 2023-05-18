@@ -37,7 +37,7 @@ int	check_all_digits(int ac, char **av)
 // check whether input number is within the int range
 int	check_num_size(char **av)
 {
-	int				av_count;
+	int		av_count;
 	long	num;
 
 	av_count = 0;

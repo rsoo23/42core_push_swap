@@ -21,7 +21,7 @@ INCLUDES = includes/push_swap.h
 SRCS_DIR = srcs/
 SRCS_FILES = doubly_linked_list_utils input_check operation_push \
 				operation_rot_revrot operation_swap push_swap \
-				sort_big sort_small utils_1
+				sort_big sort_small sort_medium utils_1 sort_big_utils
 C_FILES = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 # obj files: /objs will be created to store the obj files
 OBJ_FILES = $(C_FILES:.c=.o)
