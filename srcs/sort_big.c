@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/19 11:04:16 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/19 12:03:09 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 		info->top_pos++;
 		head = head->next;
 	}
-	printf("top_pos:%d\n", info->top_pos);
+	// printf("top_pos:%d\n", info->top_pos);
 	while (tail)
 	{
 		if (tail->index > info->part * i && tail->index <= info->part * (i + 1))
@@ -37,7 +37,7 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 		info->bot_pos++;
 		tail = tail->prev;
 	}
-	printf("bot_pos:%d\n", info->bot_pos);
+	// printf("bot_pos:%d\n", info->bot_pos);
 }
 
 void	rot_a_num_to_head(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
@@ -80,10 +80,7 @@ void	rot_prev_to_tail(int head_index_a, t_dlist **stack_a, t_dlist **stack_b)
 void	push_b_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
 	if (info->size_b == 0 || check_bigger_than_all((*stack_a)->index, *stack_b))
-	{
-		// write(1, "1st if:\n", 8);
 		push('b', stack_a, stack_b);
-	}
 	else if (check_smaller_than_all((*stack_a)->index, *stack_b))
 	{
 		push('b', stack_a, stack_b);
@@ -106,20 +103,20 @@ void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 	info = malloc(sizeof(t_info));
 	init_info(info, size_a);
 	assign_index(stack_a, size_a);
-	info->part = size_a / 5;
+	assign_part_size(info);
 	while (info->size_a > 0)
 	{
 		info->top_pos = 0;
 		info->bot_pos = 1;
 		find_top_bottom_index(*stack_a, info);
 		rot_a_num_to_head(stack_a, stack_b, info);
-		printf("head_a_index: %d\n", (*stack_a)->index);
+		// printf("head_a_index: %d\n", (*stack_a)->index);
 		push_b_sequence(stack_a, stack_b, info);
 		info->size_b++;
 		info->size_a--;
 	}
 	while ((*stack_b)->index != 1)
-		rotate('b', stack_a, stack_b);
+		rotate('b', stack_a, stack_b);  //use midpoint
 	while (info->size_b-- > 0)
 		push('a', stack_a, stack_b);
 	free(info);

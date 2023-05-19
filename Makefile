@@ -24,19 +24,20 @@ SRCS_FILES = doubly_linked_list_utils input_check operation_push \
 				sort_big sort_small sort_medium utils_1 sort_big_utils
 C_FILES = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 # obj files: /objs will be created to store the obj files
-OBJ_FILES = $(C_FILES:.c=.o)
+OBJ = $(C_FILES:.c=.o)
 
 LIBFT_DIR = libft
 LIBFT = libft.a
 
 # Bonus Variables
 BONUS_NAME = checker
-
-BONUS_DIR = /bonus_srcs
-BONUS_FILES = push_swap
-BONUS_C_FILES = $(addprefix $(BONUS_DIR), $(addsuffix .c, $(BONUS_FILES)))
-
-BONUS_OBJ_FILES = $(BONUS_C_FILES:.c=.o)
+BONUS_FILES = bonus_srcs/checker.c
+BONUS_MAN_SRCS = doubly_linked_list_utils input_check operation_push \
+				operation_rot_revrot operation_swap sort_big sort_small \
+				sort_medium utils_1 sort_big_utils
+BONUS_MAN_FILES = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(BONUS_MAN_SRCS)))
+BONUS_OBJ = $(BONUS_FILES:.c=.o)
+BONUS_MAN_OBJ = $(BONUS_MAN_FILES:.c=.o)
 
 # Other utilities:
 # object file creation
@@ -45,18 +46,19 @@ BONUS_OBJ_FILES = $(BONUS_C_FILES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ_FILES)
+$(NAME): $(OBJ)
 	make -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(NAME) $(LIBFT_DIR)/$(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT_DIR)/$(LIBFT)
 
-bonus: $(NAME) $(BONUS_NAME)
+bonus: $(BONUS_NAME)
 
-$(BONUS_NAME): $(BONUS_OBJS)
-	$(CC) $(CFLAGS) $(BONUS_OBJS) -o $(BONUS_NAME) $(LIBFT)
+$(BONUS_NAME): $(BONUS_OBJ) $(BONUS_MAN_OBJ)
+	make -C $(LIBFT_DIR)
+	$(CC) $(CFLAGS) $(BONUS_OBJ) $(BONUS_MAN_OBJ) -o $(BONUS_NAME) $(LIBFT_DIR)/$(LIBFT)
 
 # cleaning, re, phony
 clean:
-	$(RM) $(OBJ_FILES)
+	$(RM) $(OBJ) $(BONUS_OBJ)
 	make clean -C $(LIBFT_DIR)
 
 fclean: clean

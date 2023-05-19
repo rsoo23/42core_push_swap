@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 11:03:25 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/11 11:03:25 by rsoo             ###   ########.fr       */
+/*   Created: 2023/05/19 12:05:58 by rsoo              #+#    #+#             */
+/*   Updated: 2023/05/19 12:05:58 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
-
-// cc -Wall -Wextra -Werror srcs/*.c libft/ft_atoi.c libft/ft_isdigit.c 
-// -fsanitize=address -g3
+#include "../includes/checker.h"
 
 int	main(int ac, char **av)
 {
@@ -28,6 +25,10 @@ int	main(int ac, char **av)
 		if (lst_check_dup(stack_a))
 		{
 			push_swap(ac - 1, &stack_a, &stack_b);
+			if (is_stack_sorted(stack_a))
+				write(1, "OK\n", 3);
+			else
+				write(1, "KO\n", 3);
 			free_stack(&stack_a);
 			free_stack(&stack_b);
 			return (0);
@@ -40,8 +41,6 @@ int	main(int ac, char **av)
 
 void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 {
-	// int i = 0;
-
 	if (is_stack_sorted(*stack_a))
 		return ;
 	else if (arr_size == 2)
@@ -52,26 +51,5 @@ void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 		sort_medium(stack_a, stack_b, arr_size);
 	else
 		sort_big(stack_a, stack_b, arr_size);
-	// while (*stack_a)
-	// {
-	// 	i++;
-	// 	printf("%d:%d\n", i, (*stack_a)->content);
-	// 	*stack_a = (*stack_a)->next;
-	// }
 	return ;
 }
-
-/*
-Process:
-
-main
-	1. input the numbers
-	2. check if the number is valid (check all digits | check size (modified atoi))
-	3. create stack
-	4. check for duplicates
-
-	5. pass stack a into push_swap
-
-push_swap
-	6. if stack a size <= 5 --> small sort, else big sort
-*/

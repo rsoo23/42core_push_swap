@@ -66,6 +66,7 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info);
 // sort_big_utils.c
 int		check_bigger_than_all(int head_index_a, t_dlist *stack_b);
 int		check_smaller_than_all(int head_index_a, t_dlist *stack_b);
+void	assign_part_size(t_info *info);
 
 // utils_1.c
 long	ft_atoi_long(const char *str);
