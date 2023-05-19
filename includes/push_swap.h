@@ -30,7 +30,6 @@ typedef struct s_info
 	int	size_a;
 	int	size_b;
 	int	pos;
-	int	midpoint;
 	int	search;
 	int	part;
 	int	top_pos;
@@ -67,6 +66,7 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info);
 int		check_bigger_than_all(int head_index_a, t_dlist *stack_b);
 int		check_smaller_than_all(int head_index_a, t_dlist *stack_b);
 void	assign_part_size(t_info *info);
+void	opt_rot(char stack, t_info *info, t_dlist **stack_a,  t_dlist **stack_b);
 
 // utils_1.c
 long	ft_atoi_long(const char *str);

@@ -17,7 +17,6 @@ void	init_info(t_info *info, int size_a)
 	info->size_a = size_a;
 	info->size_b = 0;
 	info->pos = 0;
-	info->midpoint = info->size_a / 2;
 	info->search = 1;
 	info->part = 1;
 	info->top_pos = 0;
@@ -65,23 +64,13 @@ void	assign_index(t_dlist **stack, int arr_size)
 
 void	find_num_rot_medium(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
-	int		rev_rot_count;
-	t_dlist	*head;
-
-	head = *stack_a;
 	info->pos = 0;
-	while (head && info->search != head->index)
+	while ((*stack_a) && info->search != (*stack_a)->index)
 	{
 		info->pos++;
-		head = head->next;
+		(*stack_a) = (*stack_a)->next;
 	}
-	rev_rot_count = info->size_a - info->pos;
-	if (info->pos <= info->midpoint)
-		while (info->pos-- > 0)
-			rotate('a', stack_a, stack_b);
-	else if (info->pos > info->midpoint)
-		while (rev_rot_count-- > 0)
-			rev_rotate('a', stack_a, stack_b);
+	opt_rot('a', info, stack_a, stack_b);
 }
 
 void	sort_medium(t_dlist **stack_a, t_dlist **stack_b, int size_a)

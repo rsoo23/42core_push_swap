@@ -6,11 +6,23 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/19 12:03:09 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/19 15:54:31 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+/*
+optimisation ideas:
+- trailing partition?
+	- instead of finding 1 - 20 until all numbers in the range are found, 
+	  maybe 
+
+- midpoint calculations for rot_prev_to_tail and rotate
+
+- different approach instead of pa * size_a when everything is sorted in 
+  stack_b
+*/
 
 void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 {
@@ -50,15 +62,15 @@ void	rot_a_num_to_head(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 			rev_rotate('a', stack_a, stack_b);
 }
 
-void	rot_prev_to_tail(int head_index_a, t_dlist **stack_a, t_dlist **stack_b)
+int	find_next_smallest(int head_index_a, t_dlist **stack_b)
 {
 	int		min_pos_diff;
 	int		diff;
-	int		rot_b_count;
+	int		pos;
 	t_dlist	*tail_b;
 
 	tail_b = ft_dlstlast(*stack_b);
-	rot_b_count = 0;
+	pos = 0;
 	min_pos_diff = 2147483647;
 	while (tail_b)
 	{
@@ -71,10 +83,9 @@ void	rot_prev_to_tail(int head_index_a, t_dlist **stack_a, t_dlist **stack_b)
 	while (tail_b && tail_b->index != head_index_a - min_pos_diff)
 	{
 		tail_b = tail_b->prev;
-		rot_b_count++;
+		pos++;
 	}
-	while (rot_b_count-- > 0)
-		rotate('b', stack_a, stack_b);
+	return (pos);
 }
 
 void	push_b_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
@@ -88,10 +99,11 @@ void	push_b_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 	}
 	else
 	{
-		rot_prev_to_tail((*stack_a)->index, stack_a, stack_b);
+		info->pos = find_next_smallest((*stack_a)->index, stack_b);
+		opt_rot('b', info, stack_a, stack_b);
 		push('b', stack_a, stack_b);
 	}
-	while ((*stack_b)->index > ft_dlstlast(*stack_b)->index)
+	while ((*stack_b)->index - 1 == ft_dlstlast(*stack_b)->index)          // while the head has a bigger index than tail do rrb
 		rev_rotate('b', stack_a, stack_b);
 	return ;
 }
@@ -110,36 +122,14 @@ void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 		info->bot_pos = 1;
 		find_top_bottom_index(*stack_a, info);
 		rot_a_num_to_head(stack_a, stack_b, info);
-		// printf("head_a_index: %d\n", (*stack_a)->index);
+		printf("head_a_index: %d\n", (*stack_a)->index);
 		push_b_sequence(stack_a, stack_b, info);
 		info->size_b++;
 		info->size_a--;
 	}
 	while ((*stack_b)->index != 1)
-		rotate('b', stack_a, stack_b);  //use midpoint
+		rotate('b', stack_a, stack_b);  //use midpoint optimizer
 	while (info->size_b-- > 0)
 		push('a', stack_a, stack_b);
 	free(info);
 }
-
-/*
-10
-24
-19
-2
-1
-3
-5
-12
-9
-
-19
-2
-1
-3
-5
-12	24
-9	10
-
-
-*/
