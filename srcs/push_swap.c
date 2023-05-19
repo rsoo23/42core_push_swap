@@ -24,17 +24,16 @@ int	main(int ac, char **av)
 	arr_size = ac - 1;
 	stack_a = NULL;
 	stack_b = NULL;
-	if (arr_size >= 1)
+	if (arr_size >= 1 && check_all_digits(ac, av) && check_num_size(av))
 	{
-		if (check_all_digits(ac, av) && check_num_size(av))
-			stack_a = create_stack_a(av);
-		else
-			write(2, "Error\n", 6);
+		stack_a = create_stack_a(av);
 		if (lst_check_dup(stack_a))
 			push_swap(arr_size, &stack_a, &stack_b);
 		else
 			write(2, "Error\n", 6);
 	}
+	else
+		write(2, "Error\n", 6);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/18 15:43:12 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/19 11:04:16 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 
 	head = stack_a;
 	tail = ft_dlstlast(stack_a);
+	if (info->size_b == info->part * (i + 1))
+		i++;
 	while (head)
 	{
 		if (head->index > info->part * i && head->index <= info->part * (i + 1))
@@ -27,11 +29,7 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 		info->top_pos++;
 		head = head->next;
 	}
-	if (info->top_pos + 1 == info->size_a)
-	{
-		i++;
-		return ;
-	}
+	printf("top_pos:%d\n", info->top_pos);
 	while (tail)
 	{
 		if (tail->index > info->part * i && tail->index <= info->part * (i + 1))
@@ -39,12 +37,13 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 		info->bot_pos++;
 		tail = tail->prev;
 	}
+	printf("bot_pos:%d\n", info->bot_pos);
 }
 
 void	rot_a_num_to_head(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
 	if (info->bot_pos >= info->top_pos)
-		while (info->pos-- > 0)
+		while (info->top_pos-- > 0)
 			rotate('a', stack_a, stack_b);
 	else if (info->bot_pos < info->top_pos)
 		while (info->bot_pos-- > 0)
@@ -81,7 +80,10 @@ void	rot_prev_to_tail(int head_index_a, t_dlist **stack_a, t_dlist **stack_b)
 void	push_b_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
 	if (info->size_b == 0 || check_bigger_than_all((*stack_a)->index, *stack_b))
+	{
+		// write(1, "1st if:\n", 8);
 		push('b', stack_a, stack_b);
+	}
 	else if (check_smaller_than_all((*stack_a)->index, *stack_b))
 	{
 		push('b', stack_a, stack_b);
@@ -92,7 +94,7 @@ void	push_b_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 		rot_prev_to_tail((*stack_a)->index, stack_a, stack_b);
 		push('b', stack_a, stack_b);
 	}
-	while ((*stack_b)->index == ft_dlstlast(*stack_b)->index + 1)
+	while ((*stack_b)->index > ft_dlstlast(*stack_b)->index)
 		rev_rotate('b', stack_a, stack_b);
 	return ;
 }
@@ -111,6 +113,7 @@ void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 		info->bot_pos = 1;
 		find_top_bottom_index(*stack_a, info);
 		rot_a_num_to_head(stack_a, stack_b, info);
+		printf("head_a_index: %d\n", (*stack_a)->index);
 		push_b_sequence(stack_a, stack_b, info);
 		info->size_b++;
 		info->size_a--;
