@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:02:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/20 13:14:48 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/20 21:53:29 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ int	check_smaller_than_all(int head_index_a, t_dlist *stack_b)
 
 void	assign_part_size(t_info *info)
 {
-	if (info->size_a <= 200)
+	if (info->size_a <= 100)
+		info->part = info->size_a / 5;
+	else if (info->size_a <= 200)
 		info->part = info->size_a / 10;
-	else if (info->size_a > 200)
+	else
 		info->part = info->size_a / 12;
 }
 

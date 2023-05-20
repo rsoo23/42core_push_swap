@@ -46,7 +46,7 @@ void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 		swap('a', stack_a, stack_b);
 	else if (arr_size == 3)
 		sort_small(stack_a, stack_b);
-	else if (arr_size <= 15)
+	else if (arr_size <= 20)
 		sort_medium(stack_a, stack_b, arr_size);
 	else
 		sort_big(stack_a, stack_b, arr_size);
