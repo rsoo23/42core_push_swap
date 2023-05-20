@@ -50,13 +50,13 @@ void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 		sort_medium(stack_a, stack_b, arr_size);
 	else
 		sort_big(stack_a, stack_b, arr_size);
-	int i = 0;
-	while (*stack_a)
-	{
-		i++;
-		printf("%d:%d\n", i, (*stack_a)->content);
-		*stack_a = (*stack_a)->next;
-	}
+	// int i = 0;
+	// while (*stack_a)
+	// {
+	// 	i++;
+	// 	printf("%d:%d\n", i, (*stack_a)->index);
+	// 	*stack_a = (*stack_a)->next;
+	// }
 	return ;
 }
 

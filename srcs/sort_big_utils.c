@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:02:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/19 15:51:49 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/20 13:14:48 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,29 @@ int	check_smaller_than_all(int head_index_a, t_dlist *stack_b)
 
 void	assign_part_size(t_info *info)
 {
-	if (info->size_a == 20)
-		info->part = info->size_a / 4;
-	else if (info->size_a <= 100)
+	if (info->size_a <= 200)
 		info->part = info->size_a / 10;
-	else if (info->size_a > 100)
-		info->part = info->size_a / 20;
+	else if (info->size_a > 200)
+		info->part = info->size_a / 12;
 }
 
 void	opt_rot(char stack, t_info *info, t_dlist **stack_a,  t_dlist **stack_b)
 {
-	int		midpoint;
 	int		rev_rot_count;
 	int		rot_count;
 	int		stack_size;
 
 	if (stack == 'a')
 		stack_size = info->size_a;
-	else
+	else if (stack == 'b')
 		stack_size = info->size_b;
-	midpoint = stack_size / 2;
+	// printf("size_b: %d", info->size_b);
 	rev_rot_count = stack_size - info->pos;
 	rot_count = info->pos;
-	if (info->pos <= midpoint)
+	if (rot_count <= rev_rot_count)
 		while (rot_count-- > 0)
 			rotate(stack, stack_a, stack_b);
-	else if (info->pos > midpoint)
+	else if (rot_count > rev_rot_count)
 		while (rev_rot_count-- > 0)
 			rev_rotate(stack, stack_a, stack_b);	
 }

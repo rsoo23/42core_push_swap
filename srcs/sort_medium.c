@@ -64,11 +64,14 @@ void	assign_index(t_dlist **stack, int arr_size)
 
 void	find_num_rot_medium(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
+	t_dlist	*head_a;
+
+	head_a = *stack_a;
 	info->pos = 0;
-	while ((*stack_a) && info->search != (*stack_a)->index)
+	while (head_a && info->search != head_a->index)
 	{
 		info->pos++;
-		(*stack_a) = (*stack_a)->next;
+		head_a = head_a->next;
 	}
 	opt_rot('a', info, stack_a, stack_b);
 }
