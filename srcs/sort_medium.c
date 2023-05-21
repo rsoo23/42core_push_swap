@@ -18,9 +18,12 @@ void	init_info(t_info *info, int size_a)
 	info->size_b = 0;
 	info->pos = 0;
 	info->search = 1;
-	info->part = 1;
 	info->top_pos = 0;
 	info->bot_pos = 1;
+	info->part_size = 1;
+	info->part_ind = 1;
+	info->part_num = 1;
+	info->upper_lim = 0;
 }
 
 int	find_largest_num(t_dlist *stack)

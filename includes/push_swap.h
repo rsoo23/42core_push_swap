@@ -31,9 +31,12 @@ typedef struct s_info
 	int	size_b;
 	int	pos;
 	int	search;
-	int	part;
 	int	top_pos;
 	int	bot_pos;
+	int	part_size;
+	int	part_ind;
+	int	part_num;
+	int	upper_lim;
 }	t_info;
 
 // push_swap.c
