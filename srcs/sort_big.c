@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/22 10:27:01 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/22 13:52:03 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,45 +62,45 @@ void	rot_a_num_to_head(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 			rev_rotate('a', stack_a, stack_b);
 }
 
-void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
-{
-	t_dlist *tail_b;
-
-	info->search = info->size_b;
-	while (info->search > 0)
-	{
-		tail_b = ft_dlstlast(*stack_b);
-		info->pos = 0;
-		while (tail_b && info->search != tail_b->index)
-		{
-			info->pos++;
-			tail_b = tail_b->prev;
-		}
-		// printf("managed to find: %d\n", info->search);
-		opt_rot('b', info, stack_a, stack_b);
-		push('a', stack_a, stack_b);
-		info->search--;
-		info->size_b--;
-	}
-}
-
 // void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 // {
-// 	while (info->size_b > 0)
+// 	t_dlist *tail_b;
+
+// 	info->search = info->size_b;
+// 	while (info->search > 0)
 // 	{
-// 		if ((*stack_a)->index - ft_dlstlast(*stack_b)->index == 1 
-// 		|| (*stack_a)->index > ft_dlstlast(*stack_b)->index)
+// 		tail_b = ft_dlstlast(*stack_b);
+// 		info->pos = 0;
+// 		while (tail_b && info->search != tail_b->index)
 // 		{
-// 			push('a', stack_a, stack_b);
-// 			info->size_b--;
+// 			info->pos++;
+// 			tail_b = tail_b->prev;
 // 		}
-// 		else
-// 			while((*stack_a)->index < ft_dlstlast(*stack_b)->index)
-// 				rotate('a', stack_a, stack_b);
-// 		while ((*stack_a)->index - ft_dlstlast(*stack_a)->index == 1)
-// 			rev_rotate('a', stack_a, stack_b);
+// 		// printf("managed to find: %d\n", info->search);
+// 		opt_rot('b', info, stack_a, stack_b);
+// 		push('a', stack_a, stack_b);
+// 		info->search--;
+// 		info->size_b--;
 // 	}
 // }
+
+void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+{
+	while (info->size_b > 0)
+	{
+		if ((*stack_a)->index - ft_dlstlast(*stack_b)->index == 1 
+		|| (*stack_a)->index > ft_dlstlast(*stack_b)->index)
+		{
+			push('a', stack_a, stack_b);
+			info->size_b--;
+		}
+		else
+			while((*stack_a)->index < ft_dlstlast(*stack_b)->index)
+				rotate('a', stack_a, stack_b);
+		while ((*stack_a)->index - ft_dlstlast(*stack_a)->index == 1)
+			rev_rotate('a', stack_a, stack_b);
+	}
+}
 
 void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 {
