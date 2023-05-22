@@ -16,6 +16,7 @@ void	init_info(t_info *info, int size_a)
 {
 	info->size_a = size_a;
 	info->size_b = 0;
+	info->input_size = size_a;
 	info->pos = 0;
 	info->search = 1;
 	info->top_pos = 0;

@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:02:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/21 21:25:11 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/22 09:39:44 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ void	opt_rot(char stack, t_info *info, t_dlist **stack_a,  t_dlist **stack_b)
 	int		rot_count;
 	int		stack_size;
 
+	stack_size = 0;
 	if (stack == 'a')
 		stack_size = info->size_a;
 	else if (stack == 'b')
 		stack_size = info->size_b;
-	// printf("size_b: %d", info->size_b);
 	rev_rot_count = stack_size - info->pos;
 	rot_count = info->pos;
 	if (rot_count <= rev_rot_count)

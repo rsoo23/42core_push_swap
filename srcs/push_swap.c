@@ -22,18 +22,21 @@ int	main(int ac, char **av)
 
 	stack_a = NULL;
 	stack_b = NULL;
-	if (ac - 1 >= 1 && check_all_digits(ac, av) && check_num_size(av))
+	if (ac - 1 >= 1)
 	{
-		stack_a = create_stack_a(av);
-		if (lst_check_dup(stack_a))
+		if (check_all_digits(ac, av) && check_num_size(av))
 		{
-			push_swap(ac - 1, &stack_a, &stack_b);
-			free_stack(&stack_a);
-			free_stack(&stack_b);
-			return (0);
+			stack_a = create_stack_a(av);
+			if (lst_check_dup(stack_a))
+			{
+				push_swap(ac - 1, &stack_a, &stack_b);
+				free_stack(&stack_a);
+				free_stack(&stack_b);
+				return (0);
+			}
 		}
+		write(2, "Error\n", 6);
 	}
-	write(2, "Error\n", 6);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 }

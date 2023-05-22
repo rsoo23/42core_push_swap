@@ -29,6 +29,7 @@ typedef struct s_info
 {
 	int	size_a;
 	int	size_b;
+	int	input_size;
 	int	pos;
 	int	search;
 	int	top_pos;
