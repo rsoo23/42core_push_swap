@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/23 11:58:37 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/23 15:16:42 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 
 	head = stack_a;
 	tail = ft_dlstlast(stack_a);
-	info->upper_lim = 50;
 	if (info->size_b == info->upper_lim)
-		info->upper_lim += info->upper_lim / 2;
-	if (info->size_b == info->)
+	{
+		info->part_size /= 2;
+		info->upper_lim += info->part_size;
+	}
 	while (head)
 	{
 		if (head->index <= info->upper_lim)
@@ -141,6 +142,14 @@ void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 // 		rev_rotate('a', stack_a, stack_b);
 // }
 
+void	push_b_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+{
+	push('b', stack_a, stack_b);
+	info->pivot += info->part_size / 2;
+	if ((*stack_a)->index <= info->part_size / 2)
+		rotate('b', stack_a, stack_b);
+}
+
 void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 {
 	t_info	*info;
@@ -155,7 +164,7 @@ void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 		info->bot_pos = 1;
 		find_top_bottom_index(*stack_a, info);
 		rot_a_num_to_head(stack_a, stack_b, info);
-		push('b', stack_a, stack_b);
+		push_b_sequence(stack_a, stack_b, info);
 		info->size_b++;
 		info->size_a--;
 	}

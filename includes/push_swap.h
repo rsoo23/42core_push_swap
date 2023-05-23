@@ -38,6 +38,7 @@ typedef struct s_info
 	int	part_ind;
 	int	part_num;
 	int	upper_lim;
+	int	pivot;
 }	t_info;
 
 // push_swap.c
