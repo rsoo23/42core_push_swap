@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/22 13:52:03 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/23 11:58:37 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,34 @@ Mine: 781
 Mine: 6890
 */
 
+// void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
+// {
+// 	t_dlist		*head;
+// 	t_dlist		*tail;
+
+// 	head = stack_a;
+// 	tail = ft_dlstlast(stack_a);
+// 	if (info->size_b == info->upper_lim)
+// 		info->part_ind++;
+// 	info->upper_lim = info->part_size * info->part_ind;
+// 	if (info->part_ind == info->part_num)
+// 		info->upper_lim = info->input_size - 3;
+// 	while (head)
+// 	{
+// 		if (head->index <= info->upper_lim)
+// 			break ;
+// 		info->top_pos++;
+// 		head = head->next;
+// 	}
+// 	while (tail)
+// 	{
+// 		if (tail->index <= info->upper_lim)
+// 			break ;
+// 		info->bot_pos++;
+// 		tail = tail->prev;
+// 	}
+// }
+
 void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 {
 	t_dlist		*head;
@@ -30,12 +58,10 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 
 	head = stack_a;
 	tail = ft_dlstlast(stack_a);
+	info->upper_lim = 50;
 	if (info->size_b == info->upper_lim)
-		info->part_ind++;
-	info->upper_lim = info->part_size * info->part_ind;
-	if (info->part_ind == info->part_num)
-		info->upper_lim = info->input_size - 3;
-	// printf("upperlim: %d\n", info->upper_lim);
+		info->upper_lim += info->upper_lim / 2;
+	if (info->size_b == info->)
 	while (head)
 	{
 		if (head->index <= info->upper_lim)
@@ -62,45 +88,58 @@ void	rot_a_num_to_head(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 			rev_rotate('a', stack_a, stack_b);
 }
 
-// void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
-// {
-// 	t_dlist *tail_b;
-
-// 	info->search = info->size_b;
-// 	while (info->search > 0)
-// 	{
-// 		tail_b = ft_dlstlast(*stack_b);
-// 		info->pos = 0;
-// 		while (tail_b && info->search != tail_b->index)
-// 		{
-// 			info->pos++;
-// 			tail_b = tail_b->prev;
-// 		}
-// 		// printf("managed to find: %d\n", info->search);
-// 		opt_rot('b', info, stack_a, stack_b);
-// 		push('a', stack_a, stack_b);
-// 		info->search--;
-// 		info->size_b--;
-// 	}
-// }
-
 void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
-	while (info->size_b > 0)
+	t_dlist *tail_b;
+
+	info->search = info->size_b;
+	while (info->search > 0)
 	{
-		if ((*stack_a)->index - ft_dlstlast(*stack_b)->index == 1 
-		|| (*stack_a)->index > ft_dlstlast(*stack_b)->index)
+		tail_b = ft_dlstlast(*stack_b);
+		info->pos = 0;
+		while (tail_b && info->search != tail_b->index)
 		{
-			push('a', stack_a, stack_b);
-			info->size_b--;
+			info->pos++;
+			tail_b = tail_b->prev;
 		}
-		else
-			while((*stack_a)->index < ft_dlstlast(*stack_b)->index)
-				rotate('a', stack_a, stack_b);
-		while ((*stack_a)->index - ft_dlstlast(*stack_a)->index == 1)
-			rev_rotate('a', stack_a, stack_b);
+		// printf("managed to find: %d\n", info->search);
+		opt_rot('b', info, stack_a, stack_b);
+		push('a', stack_a, stack_b);
+		info->search--;
+		info->size_b--;
 	}
 }
+
+// void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+// {
+// 	while (info->size_b > 0)
+// 	{
+// 		if (ft_dlstlast(*stack_b)->index - ft_dlstlast(*stack_a)->index == 1)
+// 		{
+// 			push('a', stack_a, stack_b);
+// 			rotate('a', stack_a, stack_b);
+// 			info->size_b--;
+// 		}
+// 		else if ((*stack_a)->index - ft_dlstlast(*stack_b)->index >= 1)
+// 		{
+// 			if (ft_dlstlast(*stack_a)->index > ft_dlstlast(*stack_b)->index)
+// 				while ((*stack_a)->index - ft_dlstlast(*stack_b)->index != 1 
+// 				&& ft_dlstlast(*stack_a)->index != info->input_size)
+// 					rev_rotate('a', stack_a, stack_b);
+// 			push('a', stack_a, stack_b);
+// 			info->size_b--;
+// 		}
+// 		else
+// 			while((*stack_a)->index < ft_dlstlast(*stack_b)->index)
+// 				rotate('a', stack_a, stack_b);
+// 		while ((*stack_a)->index - ft_dlstlast(*stack_a)->index == 1)
+// 			rev_rotate('a', stack_a, stack_b);
+// 		while ((*stack_a)->index - ft_dlstlast(*stack_a)->index == 1)
+// 			rotate('a', stack_a, stack_b);
+// 	}
+// 	while ((*stack_a)->index != 1)
+// 		rev_rotate('a', stack_a, stack_b);
+// }
 
 void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 {
@@ -109,8 +148,7 @@ void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 	info = malloc(sizeof(t_info));
 	init_info(info, size_a);
 	assign_index(stack_a, size_a);
-	assign_part_size(info);
-	// info->part_size= size_a / 2;
+	// assign_part_size(info);
 	while (info->size_a > 3)
 	{
 		info->top_pos = 0;
@@ -121,6 +159,7 @@ void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 		info->size_b++;
 		info->size_a--;
 	}
+	sort_small(stack_a, stack_b);
 	// int i = 0;
 	// while ((*stack_b))
 	// {
@@ -128,7 +167,6 @@ void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 	// 	printf("%d:%d\n", i, ((*stack_b))->index);
 	// 	(*stack_b) = ((*stack_b))->next;
 	// }
-	sort_small(stack_a, stack_b);
 	push_a_sequence(stack_a, stack_b, info);
 	free(info);
 }
