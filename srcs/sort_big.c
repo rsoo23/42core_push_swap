@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/23 15:16:42 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/23 16:43:23 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,20 @@ void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 // 		rev_rotate('a', stack_a, stack_b);
 // }
 
+/*
+1. range: 0 - 50: part_size = 100 / 2, upperlim = 50, pivot = (0 + 50) = 25, 
+2. range: 50 - 75: part_size = 50 / 2, upperlim += part_size = 75, pivot =  (50 + 75) / 2 = 62.5,
+3. range: 75 - 87.5: part_size = 25 / 2, upperlim = 87.5, pivot = (75 + 87.5) = 81.25, 
+
+(upperlimit - partsize + upperlimit) / 2
+*/
+
 void	push_b_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
 	push('b', stack_a, stack_b);
-	info->pivot += info->part_size / 2;
-	if ((*stack_a)->index <= info->part_size / 2)
+	info->pivot = (2 * info->upper_lim - info->part_ind) / 2;
+	// printf("pivot:%d, partsize: %d\n", info->pivot, info->part_size);
+	if ((*stack_a)->index <= info->pivot)
 		rotate('b', stack_a, stack_b);
 }
 

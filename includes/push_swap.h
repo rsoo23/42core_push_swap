@@ -63,7 +63,6 @@ void	sort_medium(t_dlist **stack_a, t_dlist **stack_b, int arr_size);
 void	find_num_rot_medium(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
 void	assign_index(t_dlist **stack, int arr_size);
 int		find_largest_num(t_dlist *stack);
-void	init_info(t_info *info, int size_a);
 // sort_big.c
 void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a);
 void	find_top_bottom_index(t_dlist *stack_a, t_info *info);
@@ -76,6 +75,7 @@ void	opt_rot(char stack, t_info *info, t_dlist **stack_a,  t_dlist **stack_b);
 // utils_1.c
 long	ft_atoi_long(const char *str);
 int		is_stack_sorted(t_dlist *stack);
+void	init_info(t_info *info, int size_a);
 void	free_stack(t_dlist **stack);
 // doubly_linked_list_utils.c
 t_dlist	*create_stack_a(char **av);

@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:38:16 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/17 10:30:23 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/23 16:19:29 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,20 @@ void	free_stack(t_dlist **stack)
 		*stack = temp;
 	}
 	*stack = NULL;
+}
+
+void	init_info(t_info *info, int size_a)
+{
+	info->size_a = size_a;
+	info->size_b = 0;
+	info->input_size = size_a;
+	info->pos = 0;
+	info->search = 1;
+	info->top_pos = 0;
+	info->bot_pos = 1;
+	info->part_size = size_a;
+	info->part_ind = 1;
+	info->part_num = 1;
+	info->upper_lim = 0;
+	info->pivot = 0;
 }
