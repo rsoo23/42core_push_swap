@@ -36,6 +36,7 @@ typedef struct s_info
 	int	bot_pos;
 	int	part_size;
 	int	upper_lim;
+	int	lower_lim;
 	int	pivot;
 	int	midpoint;
 }	t_info;
