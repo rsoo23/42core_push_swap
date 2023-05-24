@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/23 22:27:08 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/24 17:15:58 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,68 +51,59 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 	}
 }
 
-void	rot_a_num_to_head(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+// void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+// {
+// 	t_dlist *tail_b;
+
+// 	info->search = info->size_b;
+// 	while (info->search > 0)
+// 	{
+// 		tail_b = ft_dlstlast(*stack_b);
+// 		info->pos = 0;
+// 		while (tail_b && info->search != tail_b->index)
+// 		{
+// 			info->pos++;
+// 			tail_b = tail_b->prev;
+// 		}
+// 		// printf("managed to find: %d\n", info->search);
+// 		opt_rot('b', info, stack_a, stack_b);
+// 		push('a', stack_a, stack_b);
+// 		info->search--;
+// 		info->size_b--;
+// 	}
+// }
+
+void	exp_half_sort_rem(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
-	if (info->bot_pos >= info->top_pos)
-		while (info->top_pos-- > 0)
-			rotate('a', stack_a, stack_b);
-	else if (info->bot_pos < info->top_pos)
-		while (info->bot_pos-- > 0)
-			rev_rotate('a', stack_a, stack_b);
+	info->midpoint = info->size_b / 2;            // midpoint = 125, info->size_b = 250
+	while (info->size_b >= info->midpoint)
+	{
+		push('a', stack_a, stack_b);
+		info->size_b--;
+	}
+	info->pivot = info->upper_lim - info->part_size / 2;
+	if (ft_dlstlast(*stack_b)->index <= info->pivot)
+		rotate('b', stack_a, stack_b);
 }
 
 void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
-	t_dlist *tail_b;
-
-	info->search = info->size_b;
-	while (info->search > 0)
+	info->midpoint = info->size_b / 2;
+	while (info->size_b > info->midpoint)
 	{
-		tail_b = ft_dlstlast(*stack_b);
-		info->pos = 0;
-		while (tail_b && info->search != tail_b->index)
+		rotate_best_num(stack_a, stack_b, info);
+		if ((*stack_a)->index - ft_dlstlast(*stack_b)->index >= 1)
 		{
-			info->pos++;
-			tail_b = tail_b->prev;
+			push('a', stack_a, stack_b);
+			info->size_b--;
 		}
-		// printf("managed to find: %d\n", info->search);
-		opt_rot('b', info, stack_a, stack_b);
-		push('a', stack_a, stack_b);
-		info->search--;
-		info->size_b--;
+		else
+			while((*stack_a)->index < ft_dlstlast(*stack_b)->index)
+				rotate('a', stack_a, stack_b);
+		while ((*stack_a)->index - ft_dlstlast(*stack_a)->index == 1)
+			rev_rotate('a', stack_a, stack_b);
 	}
 }
-
-// void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
-// {
-// 	while (info->size_b > 0)
-// 	{
-// 		if (ft_dlstlast(*stack_b)->index - ft_dlstlast(*stack_a)->index == 1)
-// 		{
-// 			push('a', stack_a, stack_b);
-// 			rotate('a', stack_a, stack_b);
-// 			info->size_b--;
-// 		}
-// 		else if ((*stack_a)->index - ft_dlstlast(*stack_b)->index >= 1)
-// 		{
-// 			if (ft_dlstlast(*stack_a)->index > ft_dlstlast(*stack_b)->index)
-// 				while ((*stack_a)->index - ft_dlstlast(*stack_b)->index != 1 
-// 				&& ft_dlstlast(*stack_a)->index != info->input_size)
-// 					rev_rotate('a', stack_a, stack_b);
-// 			push('a', stack_a, stack_b);
-// 			info->size_b--;
-// 		}
-// 		else
-// 			while((*stack_a)->index < ft_dlstlast(*stack_b)->index)
-// 				rotate('a', stack_a, stack_b);
-// 		while ((*stack_a)->index - ft_dlstlast(*stack_a)->index == 1)
-// 			rev_rotate('a', stack_a, stack_b);
-// 		while ((*stack_a)->index - ft_dlstlast(*stack_a)->index == 1)
-// 			rotate('a', stack_a, stack_b);
-// 	}
-// 	while ((*stack_a)->index != 1)
-// 		rev_rotate('a', stack_a, stack_b);
-// }
 
 /*
 1. range: 0 - 50: part_size = 100 / 2, upperlim = 50, pivot = (0 + 50) = 25, 
@@ -122,11 +113,14 @@ void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 (upperlimit - partsize + upperlimit) / 2
 */
 
-void	push_b_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+void	exp_half_sort_a(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
+	info->top_pos = 0;
+	info->bot_pos = 1;
+	find_top_bottom_index(*stack_a, info);
+	opt_rot_top_bot('a', stack_a, stack_b, info);
 	push('b', stack_a, stack_b);
-	info->pivot = (2 * info->upper_lim - info->part_size) / 2;
-	// printf("pivot:%d, partsize: %d\n", info->pivot, info->part_size);
+	info->pivot = info->upper_lim - info->part_size / 2;
 	if (ft_dlstlast(*stack_b)->index <= info->pivot)
 		rotate('b', stack_a, stack_b);
 }
@@ -138,25 +132,17 @@ void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 	info = malloc(sizeof(t_info));
 	init_info(info, size_a);
 	assign_index(stack_a, size_a);
-	// assign_part_size(info);
 	while (info->size_a > 3)
 	{
-		info->top_pos = 0;
-		info->bot_pos = 1;
-		find_top_bottom_index(*stack_a, info);
-		rot_a_num_to_head(stack_a, stack_b, info);
-		push_b_sequence(stack_a, stack_b, info);
+		exp_half_sort_a(stack_a, stack_b, info);
 		info->size_b++;
 		info->size_a--;
 	}
 	sort_small(stack_a, stack_b);
-	// int i = 0;
-	// while ((*stack_b))
-	// {
-	// 	i++;
-	// 	printf("%d:%d\n", i, ((*stack_b))->index);
-	// 	(*stack_b) = ((*stack_b))->next;
-	// }
-	push_a_sequence(stack_a, stack_b, info);
+	while (info->size_b > 0)
+	{
+		push_a_sequence(stack_a, stack_b, info);
+		exp_half_sort_rem(stack_a, stack_b, info);
+	}
 	free(info);
 }
