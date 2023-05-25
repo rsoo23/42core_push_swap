@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:38:16 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/25 13:50:16 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/25 21:50:33 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,21 @@ int	is_stack_sorted(t_dlist *stack)
 	return (1);
 }
 
+int	is_index_sorted(t_dlist *stack)
+{
+	if (stack->index == 1)
+	{
+		while (stack->next)
+		{
+			if (stack->index > stack->next->index)
+				return (0);
+			stack = stack->next;
+		}
+		return (1);
+	}
+	return (0);
+}
+
 void	free_stack(t_dlist **stack)
 {
 	t_dlist	*temp;
@@ -78,4 +93,5 @@ void	init_info(t_info *info, int size_a)
 	info->pivot = 0;
 	info->midpoint = 0;
 	info->rem_midpoint = size_a / 4;
+	info->original_size_b = 0;
 }

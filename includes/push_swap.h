@@ -40,6 +40,7 @@ typedef struct s_info
 	int	pivot;
 	int	midpoint;
 	int	rem_midpoint;
+	int	original_size_b;
 }	t_info;
 
 // push_swap.c
@@ -79,6 +80,7 @@ long	ft_atoi_long(const char *str);
 int		is_stack_sorted(t_dlist *stack);
 void	init_info(t_info *info, int size_a);
 void	free_stack(t_dlist **stack);
+int		is_index_sorted(t_dlist *stack);
 // doubly_linked_list_utils.c
 t_dlist	*create_stack_a(char **av);
 t_dlist	*ft_dlstnew(int num);
