@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:02:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/24 16:45:56 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/25 15:50:09 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	rotate_best_num(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
 	t_dlist	*tail_b;
 	t_dlist	*head_b;
-	int		diff;
 	
 	tail_b = ft_dlstlast(*stack_b);
 	head_b = *stack_b;
@@ -61,19 +60,43 @@ void	rotate_best_num(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 	info->bot_pos = 1;
 	while (tail_b)
 	{
-		diff = (*stack_a)->index - tail_b->index;
-		if (diff <= 2)
+		if ((*stack_a)->index - tail_b->index <= 2)
 			break ;
 		info->top_pos++;
 		tail_b = tail_b->prev;
 	}
 	while (head_b)
 	{
-		diff = (*stack_a)->index - (head_b)->index;
-		if (diff <= 2)
+		if ((*stack_a)->index - head_b->index <= 2)
 			break ;
 		info->bot_pos++;
 		head_b = (head_b)->next;
 	}
 	opt_rot_top_bot('b', stack_a, stack_b, info);
 }
+
+// void	rotate_best_num_rem(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+// {
+// 	t_dlist	*tail_b;
+// 	t_dlist	*head_b;
+	
+// 	tail_b = ft_dlstlast(*stack_b);
+// 	head_b = *stack_b;
+// 	info->top_pos = 0;
+// 	info->bot_pos = 1;
+// 	while (tail_b)
+// 	{
+// 		if (tail_b->index > info->lower_lim)
+// 			break ;
+// 		info->top_pos++;
+// 		tail_b = tail_b->prev;
+// 	}
+// 	while (head_b)
+// 	{
+// 		if (head_b->index > info->lower_lim)
+// 			break ;
+// 		info->bot_pos++;
+// 		head_b = (head_b)->next;
+// 	}
+// 	opt_rot_top_bot('b', stack_a, stack_b, info);
+// }

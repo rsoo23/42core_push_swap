@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:38:16 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/24 22:34:47 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/25 13:50:16 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ void	init_info(t_info *info, int size_a)
 	info->lower_lim = 0;
 	info->pivot = 0;
 	info->midpoint = 0;
+	info->rem_midpoint = size_a / 4;
 }

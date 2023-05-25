@@ -39,6 +39,7 @@ typedef struct s_info
 	int	lower_lim;
 	int	pivot;
 	int	midpoint;
+	int	rem_midpoint;
 }	t_info;
 
 // push_swap.c
@@ -66,11 +67,13 @@ int		find_largest_num(t_dlist *stack);
 // sort_big.c
 void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a);
 void	find_top_bottom_index(t_dlist *stack_a, t_info *info);
+void	exp_half_sort_a(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
 
 // sort_utils.c
 void	opt_rot(char stack, t_info *info, t_dlist **stack_a,  t_dlist **stack_b);
-void	rotate_best_num(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
 void	opt_rot_top_bot(char s, t_dlist **stack_a, t_dlist **stack_b, t_info *info);
+void	rotate_best_num(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
+void	rotate_best_num_rem(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
 // utils_1.c
 long	ft_atoi_long(const char *str);
 int		is_stack_sorted(t_dlist *stack);
