@@ -12,9 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-// cc -Wall -Wextra -Werror srcs/*.c libft/ft_atoi.c libft/ft_isdigit.c 
-// -fsanitize=address -g3
-
 int	main(int ac, char **av)
 {
 	t_dlist	*stack_a;
@@ -53,27 +50,5 @@ void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 		sort_medium(stack_a, stack_b, arr_size);
 	else
 		sort_big(stack_a, stack_b, arr_size);
-	// int i = 0;
-	// while (*stack_a)
-	// {
-	// 	i++;
-	// 	printf("%d:%d\n", i, (*stack_a)->index);
-	// 	*stack_a = (*stack_a)->next;
-	// }
 	return ;
 }
-
-/*
-Process:
-
-main
-	1. input the numbers
-	2. check if the number is valid (check all digits | check size (modified atoi))
-	3. create stack
-	4. check for duplicates
-
-	5. pass stack a into push_swap
-
-push_swap
-	6. if stack a size <= 5 --> small sort, else big sort
-*/

@@ -48,9 +48,6 @@ void	assign_index(t_dlist **stack, int arr_size)
 	}
 }
 
-	// printf("index %d is in pos %d\n", info->search, info->pos);
-	// printf("mid: %d, rrcount: %d\n", info->midpoint, rev_rot_count);
-
 void	find_num_rot_medium(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
 	t_dlist	*head_a;
@@ -85,17 +82,3 @@ void	sort_medium(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 		push('a', stack_a, stack_b);
 	free(info);
 }
-
-/*
-testing 1:
-5	
-2		4
-3		5			3
-1		2			4	2
-4		3	1		5	1	
-
-rra rra pb
-rra rra pb
-small sort
-pa pa
-*/

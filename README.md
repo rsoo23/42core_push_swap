@@ -4,5 +4,5 @@ Tester: https://github.com/laisarena/push_swap_tester
 Average for 100 num:
 Average for 500 num:
 
-100 numbers:
-https://codepen.io/ahkoh/full/bGWxmVz?JwNgBAzADGDsbABxhOALGAjPATDlArGIjBMJBmvJuLPphossDGvhJmAeDp4uJhgFy5HDGDxgEOERDJM02NJzhwicgWSxxGaUUzJ8aIok4hOOeGjXwQpdnqGdYV6RHDBysTmg24iOKLIBNJoWjzSIPggjCZwlIzSmPREwM7IaKycEMz4BPSQAYwYgjAgiuSYZhoYwLLwEPCI9BpE+SoE+VHdnXh4IF29OIMdKh2dI+O93WNRQ0PD7b1dePmD02uzC9P9E+vLW0uLowPtw2Mbh-0n53vjow8baxNjN+cD7y6Wll8gdL90D6nC4qbyIAjYUxVCGwcGdbAuJhVcHYVDmAwYgzwxFMJGmVCYGGmFGwAlomjYsFQ8zEvaQ0ywhEGYksvFEmjMynEjmEmGMtECskDem4miCjlorm40XSolQ-E0tl8gli3l7CYI8wuREIqlQrF80XioVisnq7C68Wk9Gq8Ua7XmFVIx0UymkqpVIA
+100 numbers: https://tinyurl.com/100-numbers
+500 numbers: https://tinyurl.com/500-numbers

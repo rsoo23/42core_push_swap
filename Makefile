@@ -21,7 +21,7 @@ INCLUDES = includes/push_swap.h
 SRCS_DIR = srcs/
 SRCS_FILES = doubly_linked_list_utils input_check operation_push \
 				operation_rot_revrot operation_swap push_swap \
-				sort_big sort_small sort_medium utils_1 sort_utils
+				sort_big sort_small sort_medium utils_1 utils_2
 C_FILES = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 # obj files: /objs will be created to store the obj files
 OBJ = $(C_FILES:.c=.o)
@@ -34,7 +34,7 @@ BONUS_NAME = checker
 BONUS_FILES = bonus_srcs/checker.c
 BONUS_MAN_SRCS = doubly_linked_list_utils input_check operation_push \
 				operation_rot_revrot operation_swap sort_big sort_small \
-				sort_medium utils_1 sort_utils
+				sort_medium utils_1 utils_2
 BONUS_MAN_FILES = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(BONUS_MAN_SRCS)))
 BONUS_OBJ = $(BONUS_FILES:.c=.o)
 BONUS_MAN_OBJ = $(BONUS_MAN_FILES:.c=.o)
