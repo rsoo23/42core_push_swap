@@ -67,8 +67,6 @@ void	assign_index(t_dlist **stack, int arr_size);
 int		find_largest_num(t_dlist *stack);
 // sort_big.c
 void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a);
-void	find_top_bottom_index(t_dlist *stack_a, t_info *info);
-void	exp_half_sort_a(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
 
 // sort_utils.c
 void	opt_rot(char stack, t_info *info, t_dlist **stack_a,  t_dlist **stack_b);

@@ -69,13 +69,12 @@ void	sort_medium(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 	info = malloc(sizeof(t_info));
 	init_info(info, size_a);
 	assign_index(stack_a, size_a);
-	while (info->size_a > 3)
+	while (info->size_b < info->input_size - 3)
 	{
 		find_num_rot_medium(stack_a, stack_b, info);
 		push('b', stack_a, stack_b);
 		info->size_b++;
 		info->search++;
-		info->size_a--;
 	}
 	sort_small(stack_a, stack_b);
 	while (info->size_b-- > 0)

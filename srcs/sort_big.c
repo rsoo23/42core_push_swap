@@ -6,13 +6,43 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/26 14:07:48 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/26 14:52:06 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	find_top_bottom_index_rem(t_dlist *stack_a, t_info *info)
+static void	find_top_bottom_index_rem(t_dlist *stack_a, t_info *info);
+static void	find_top_bottom_index(t_dlist *stack_a, t_info *info);
+static void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
+static void	exp_half_sort_a(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
+static void	exp_half_sort_rem(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
+
+void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
+{
+	t_info	*info;
+	
+	info = malloc(sizeof(t_info));
+	init_info(info, size_a);
+	assign_index(stack_a, size_a);
+	while (info->size_b < info->input_size - 3)
+	{
+		exp_half_sort_a(stack_a, stack_b, info);
+		info->size_b++;
+	}
+	sort_small(stack_a, stack_b);
+	push_a_sequence(stack_a, stack_b, info);
+	
+	while (!is_index_sorted(*stack_a))
+	{
+		if (info->input_size >= 200)
+			exp_half_sort_rem(stack_a, stack_b, info);
+		push_a_sequence(stack_a, stack_b, info);
+	}
+	free(info);
+}
+
+static void	find_top_bottom_index_rem(t_dlist *stack_a, t_info *info)
 {
 	t_dlist		*head;
 	t_dlist		*tail;
@@ -42,7 +72,7 @@ void	find_top_bottom_index_rem(t_dlist *stack_a, t_info *info)
 	}
 }
 
-void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
+static void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 {
 	t_dlist		*head;
 	t_dlist		*tail;
@@ -72,7 +102,7 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 	}
 }
 
-void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+static void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
 	if (info->size_b == info->input_size - 3)
 		info->midpoint = info->input_size / 2;
@@ -96,7 +126,7 @@ void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 	}
 }
 
-void	exp_half_sort_rem(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+static void	exp_half_sort_rem(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
 	info->original_size_b = info->size_b;
 	info->lower_lim = info->original_size_b - info->rem_midpoint;
@@ -151,7 +181,7 @@ upperlim = 238 + 1 = 239
 (upperlimit - partsize + upperlimit) / 2
 */
 
-void	exp_half_sort_a(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+static void	exp_half_sort_a(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
 	info->top_pos = 0;
 	info->bot_pos = 1;
@@ -164,30 +194,4 @@ void	exp_half_sort_a(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 	info->pivot = info->upper_lim - info->part_size / 2;
 	if (ft_dlstlast(*stack_b)->index < info->pivot)
 		rotate('b', stack_a, stack_b);
-}
-
-void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
-{
-	t_info	*info;
-	
-	info = malloc(sizeof(t_info));
-	init_info(info, size_a);
-	assign_index(stack_a, size_a);
-	while (info->size_a > 3)
-	{
-		exp_half_sort_a(stack_a, stack_b, info);
-		info->size_b++;
-		info->size_a--;
-	}
-	
-	sort_small(stack_a, stack_b);
-	while (info->size_b > 0)
-	{
-		push_a_sequence(stack_a, stack_b, info);
-		if (is_index_sorted(*stack_a))
-			break ;
-		if (info->input_size >= 200)
-			exp_half_sort_rem(stack_a, stack_b, info);
-	}
-	free(info);
 }
