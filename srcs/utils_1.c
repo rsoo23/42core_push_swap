@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:38:16 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/25 21:50:33 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/26 09:06:57 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,17 @@ int	is_stack_sorted(t_dlist *stack)
 
 int	is_index_sorted(t_dlist *stack)
 {
+	int	index;
+
+	index = 1;
 	if (stack->index == 1)
 	{
 		while (stack->next)
 		{
-			if (stack->index > stack->next->index)
+			if (stack->index != index)
 				return (0);
 			stack = stack->next;
+			index++;
 		}
 		return (1);
 	}

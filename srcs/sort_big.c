@@ -6,11 +6,41 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/25 21:47:28 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/26 14:07:48 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+void	find_top_bottom_index_rem(t_dlist *stack_a, t_info *info)
+{
+	t_dlist		*head;
+	t_dlist		*tail;
+
+	head = stack_a;
+	tail = ft_dlstlast(stack_a);
+	if (info->size_b == info->upper_lim)
+	{
+		info->part_size /= 2;
+		info->upper_lim += info->part_size;
+		if (info->part_size <= 10)
+			info->upper_lim = info->original_size_b;
+	}
+	while (head)
+	{
+		if (head->index <= info->upper_lim)
+			break ;
+		info->top_pos++;
+		head = head->next;
+	}
+	while (tail)
+	{
+		if (tail->index <= info->upper_lim)
+			break ;
+		info->bot_pos++;
+		tail = tail->prev;
+	}
+}
 
 void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 {
@@ -23,8 +53,8 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 	{
 		info->part_size /= 2;
 		info->upper_lim += info->part_size;
-		if (info->part_size == 0)
-			info->upper_lim = info->original_size_b;
+		if (info->part_size <= 10)
+			info->upper_lim = info->input_size - 3;
 	}
 	while (head)
 	{
@@ -48,7 +78,7 @@ void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 		info->midpoint = info->input_size / 2;
 	else if (info->size_b == info->input_size / 2)
 		info->midpoint = info->input_size / 4;
-	else if (info->size_b == info->rem_midpoint)
+	else if (info->size_b == info->input_size / 4)
 		info->midpoint = 0;
 	while (info->size_b > info->midpoint)
 	{
@@ -70,9 +100,12 @@ void	exp_half_sort_rem(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
 	info->original_size_b = info->size_b;
 	info->lower_lim = info->original_size_b - info->rem_midpoint;
+	info->midpoint = (info->original_size_b + info->lower_lim) / 2;
 	while (info->size_b > info->lower_lim)
 	{
 		push('a', stack_a, stack_b);
+		if ((*stack_a)->index > info->midpoint)
+			rotate('a', stack_a, stack_b);
 		info->size_b--;
 	}
 	info->upper_lim = (info->original_size_b + info->lower_lim) / 2;
@@ -122,7 +155,10 @@ void	exp_half_sort_a(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 {
 	info->top_pos = 0;
 	info->bot_pos = 1;
-	find_top_bottom_index(*stack_a, info);
+	if (info->size_b > info->input_size / 2)
+		find_top_bottom_index(*stack_a, info);
+	else
+		find_top_bottom_index_rem(*stack_a, info);
 	opt_rot_top_bot('a', stack_a, stack_b, info);
 	push('b', stack_a, stack_b);
 	info->pivot = info->upper_lim - info->part_size / 2;
@@ -143,6 +179,7 @@ void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 		info->size_b++;
 		info->size_a--;
 	}
+	
 	sort_small(stack_a, stack_b);
 	while (info->size_b > 0)
 	{
