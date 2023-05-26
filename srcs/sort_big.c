@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/26 14:52:06 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/26 23:41:45 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 	}
 	sort_small(stack_a, stack_b);
 	push_a_sequence(stack_a, stack_b, info);
-	
 	while (!is_index_sorted(*stack_a))
 	{
 		if (info->input_size >= 200)
@@ -107,9 +106,9 @@ static void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 	if (info->size_b == info->input_size - 3)
 		info->midpoint = info->input_size / 2;
 	else if (info->size_b == info->input_size / 2)
-		info->midpoint = info->input_size / 4;
+		info->midpoint = info->input_size / 4 - 1;
 	else if (info->size_b == info->input_size / 4)
-		info->midpoint = 0;
+		info->midpoint = -1;
 	while (info->size_b > info->midpoint)
 	{
 		rotate_best_num(stack_a, stack_b, info);
@@ -131,7 +130,7 @@ static void	exp_half_sort_rem(t_dlist **stack_a, t_dlist **stack_b, t_info *info
 	info->original_size_b = info->size_b;
 	info->lower_lim = info->original_size_b - info->rem_midpoint;
 	info->midpoint = (info->original_size_b + info->lower_lim) / 2;
-	while (info->size_b > info->lower_lim)
+	while (info->size_b >= info->lower_lim && info->size_b != 0)
 	{
 		push('a', stack_a, stack_b);
 		if ((*stack_a)->index > info->midpoint)
