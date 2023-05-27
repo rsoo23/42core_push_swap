@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 		if (lst_check_dup(stack_a))
 		{
 			push_swap(ac - 1, &stack_a, &stack_b);
-			if (is_stack_sorted(stack_a))
+			if (is_index_sorted(stack_a))
 				write(1, "OK\n", 3);
 			else
 				write(1, "KO\n", 3);

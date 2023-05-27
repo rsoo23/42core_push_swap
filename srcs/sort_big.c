@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/26 23:41:45 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/27 11:37:49 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ static void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 	if (info->size_b == info->input_size - 3)
 		info->midpoint = info->input_size / 2;
 	else if (info->size_b == info->input_size / 2)
-		info->midpoint = info->input_size / 4 - 1;
+		info->midpoint = info->input_size / 4;
 	else if (info->size_b == info->input_size / 4)
-		info->midpoint = -1;
+		info->midpoint = 0;
 	while (info->size_b > info->midpoint)
 	{
 		rotate_best_num(stack_a, stack_b, info);
