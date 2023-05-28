@@ -39,21 +39,17 @@ int	main(int ac, char **av)
 	free_stack(&stack_b);
 }
 
-void	push_swap(int stack_size, t_dlist **stack_a, t_dlist **stack_b)
+void	push_swap(int arr_size, t_dlist **stack_a, t_dlist **stack_b)
 {
-	t_info	*info;
-	
-	info = malloc(sizeof(t_info));
-	init_info(info, stack_size);
 	if (is_stack_sorted(*stack_a))
 		return ;
-	else if (stack_size == 2)
+	else if (arr_size == 2)
 		swap('a', stack_a, stack_b);
-	else if (stack_size == 3)
+	else if (arr_size == 3)
 		sort_small(stack_a, stack_b);
-	else if (stack_size <= 15)
-		sort_medium(stack_a, stack_b, stack_size);
+	else if (arr_size <= 15)
+		sort_medium(stack_a, stack_b, arr_size);
 	else
-		sort_big(stack_a, stack_b, stack_size, info);
-	free(info);
+		sort_big(stack_a, stack_b, arr_size);
+	return ;
 }
