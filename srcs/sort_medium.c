@@ -26,12 +26,12 @@ int	find_largest_num(t_dlist *stack)
 	return (largest_num);
 }
 
-void	assign_index(t_dlist **stack, int arr_size)
+void	assign_index(t_dlist **stack, int size_a)
 {
 	int		largest_num;
 	t_dlist	*head;
 
-	while (arr_size >= 1)
+	while (size_a >= 1)
 	{
 		head = *stack;
 		largest_num = find_largest_num(head);
@@ -39,12 +39,12 @@ void	assign_index(t_dlist **stack, int arr_size)
 		{
 			if (head->content == largest_num && head->index == 0)
 			{
-				head->index = arr_size;
+				head->index = size_a;
 				break ;
 			}
 			head = head->next;
 		}
-		arr_size--;
+		size_a--;
 	}
 }
 
