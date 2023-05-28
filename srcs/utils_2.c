@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_utils.c                                       :+:      :+:    :+:   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:02:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/25 22:02:24 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/28 15:02:03 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,64 @@ void	rotate_best_num(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
 		head_b = (head_b)->next;
 	}
 	opt_rot_top_bot('b', stack_a, stack_b, info);
+}
+
+void	find_top_bottom_index_rem(t_dlist *stack_a, t_info *info)
+{
+	t_dlist		*head_a;
+	t_dlist		*tail_a;
+
+	head_a = stack_a;
+	tail_a = ft_dlstlast(stack_a);
+	if (info->size_b == info->upper_lim)
+	{
+		info->part_size /= 2;
+		info->upper_lim += info->part_size;
+		if (info->part_size <= 10)
+			info->upper_lim = info->original_size_b;
+	}
+	while (head_a)
+	{
+		if (head_a->index <= info->upper_lim)
+			break ;
+		info->top_pos++;
+		head_a = head_a->next;
+	}
+	while (tail_a)
+	{
+		if (tail_a->index <= info->upper_lim)
+			break ;
+		info->bot_pos++;
+		tail_a = tail_a->prev;
+	}
+}
+
+void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
+{
+	t_dlist	*head;
+	t_dlist	*tail;
+
+	head = stack_a;
+	tail = ft_dlstlast(stack_a);
+	if (info->size_b == info->upper_lim)
+	{
+		info->part_size /= 2;
+		info->upper_lim += info->part_size;
+		if (info->part_size <= 10)
+			info->upper_lim = info->input_size - 3;
+	}
+	while (head)
+	{
+		if (head->index <= info->upper_lim)
+			break ;
+		info->top_pos++;
+		head = head->next;
+	}
+	while (tail)
+	{
+		if (tail->index <= info->upper_lim)
+			break ;
+		info->bot_pos++;
+		tail = tail->prev;
+	}
 }

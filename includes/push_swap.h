@@ -67,18 +67,23 @@ void	assign_index(t_dlist **stack, int arr_size);
 int		find_largest_num(t_dlist *stack);
 // sort_big.c
 void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a);
+void	push_a_insertion(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
+void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
+void	exp_half_sort_a(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
+void	exp_half_sort_rem(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
 
-// sort_utils.c
-void	opt_rot(char stack, t_info *info, t_dlist **stack_a,  t_dlist **stack_b);
-void	opt_rot_top_bot(char s, t_dlist **stack_a, t_dlist **stack_b, t_info *info);
-void	rotate_best_num(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
-void	rotate_best_num_rem(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
 // utils_1.c
 long	ft_atoi_long(const char *str);
 int		is_stack_sorted(t_dlist *stack);
 void	init_info(t_info *info, int size_a);
 void	free_stack(t_dlist **stack);
 int		is_index_sorted(t_dlist *stack);
+// utils_2.c
+void	opt_rot(char stack, t_info *info, t_dlist **stack_a,  t_dlist **stack_b);
+void	opt_rot_top_bot(char s, t_dlist **stack_a, t_dlist **stack_b, t_info *info);
+void	rotate_best_num(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
+void	find_top_bottom_index_rem(t_dlist *stack_a, t_info *info);
+void	find_top_bottom_index(t_dlist *stack_a, t_info *info);
 // doubly_linked_list_utils.c
 t_dlist	*create_stack_a(char **av);
 t_dlist	*ft_dlstnew(int num);
