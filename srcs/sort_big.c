@@ -6,18 +6,14 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/28 15:07:22 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/28 17:46:14 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
+void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a, t_info *info)
 {
-	t_info	*info;
-	
-	info = malloc(sizeof(t_info));
-	init_info(info, size_a);
 	assign_index(stack_a, size_a);
 	while (info->size_b < info->input_size - 3)
 	{
@@ -25,19 +21,23 @@ void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a)
 		info->size_b++;
 	}
 	sort_small(stack_a, stack_b);
-	push_a_sequence(stack_a, stack_b, info);
-	while (!is_index_sorted(*stack_a))
-	{
-		if (info->input_size >= 200)
-			exp_half_sort_rem(stack_a, stack_b, info);
-		if (info->size_b == info->input_size / 2)
-			info->lower_lim = info->input_size / 4;
-		else if (info->size_b == info->input_size / 4)
-			info->midpoint = info->lower_lim; 
-		while (info->size_b > info->lower_lim)
+	if (info->input_size <= 200)
+		while (info->size_b > 0)
 			push_a_insertion(stack_a, stack_b, info);
+	else if (info->input_size > 200)
+	{
+		push_a_sequence(stack_a, stack_b, info);
+		while (!is_index_sorted(*stack_a))
+		{
+			exp_half_sort_rem(stack_a, stack_b, info);
+			if (info->size_b == info->input_size / 2)
+				info->lower_lim = info->input_size / 4;
+			else if (info->size_b == info->input_size / 4)
+				info->lower_lim = 0;	
+			while (info->size_b > info->lower_lim)
+				push_a_insertion(stack_a, stack_b, info);
+		}		
 	}
-	free(info);
 }
 
 void	push_a_insertion(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
