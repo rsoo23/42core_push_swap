@@ -22,12 +22,12 @@ node1: head
 node2: next_node
 */
 
-static void	swap_a(t_dlist **stack_a)
+static void	swap_a(t_dlist **stk_a)
 {
 	t_dlist	*head;
 	t_dlist	*next_node;
 
-	head = *stack_a;
+	head = *stk_a;
 	next_node = head->next;
 	if (head->next == NULL)
 		return ;
@@ -37,7 +37,7 @@ static void	swap_a(t_dlist **stack_a)
 	next_node->next = head;
 	if (head->next != NULL)
 		head->next->prev = head;
-	*stack_a = next_node;
+	*stk_a = next_node;
 }
 
 /*
@@ -50,12 +50,12 @@ node2: prev_node
 node3: tail
 */
 
-static void	swap_b(t_dlist **stack_b)
+static void	swap_b(t_dlist **stk_b)
 {
 	t_dlist	*prev_node;
 	t_dlist	*tail;
 
-	tail = ft_dlstlast(*stack_b);
+	tail = ft_dlstlast(*stk_b);
 	prev_node = tail->prev;
 	if (tail->prev == NULL)
 		return ;
@@ -66,25 +66,25 @@ static void	swap_b(t_dlist **stack_b)
 	if (tail->prev != NULL)
 		tail->prev->next = tail;
 	else
-		*stack_b = tail;
+		*stk_b = tail;
 }
 
-void	swap(char stack, t_dlist **stack_a, t_dlist **stack_b)
+void	swap(char stk, t_dlist **stk_a, t_dlist **stk_b)
 {
-	if (stack == 'a')
+	if (stk == 'a')
 	{
-		swap_a(stack_a);
+		swap_a(stk_a);
 		write(1, "sa\n", 3);
 	}
-	else if (stack == 'b')
+	else if (stk == 'b')
 	{
-		swap_b(stack_b);
+		swap_b(stk_b);
 		write(1, "sb\n", 3);
 	}
-	else if (stack == 's')
+	else if (stk == 's')
 	{
-		swap_a(stack_a);
-		swap_b(stack_b);
+		swap_a(stk_a);
+		swap_b(stk_b);
 		write(1, "ss\n", 3);
 	}
 	return ;

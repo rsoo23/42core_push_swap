@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 // testing libraries
-# include <stdio.h>
+// # include <stdio.h>
 
 typedef struct s_dlist
 {
@@ -44,48 +44,48 @@ typedef struct s_info
 }	t_info;
 
 // push_swap.c
-void	push_swap(int size_a, t_dlist **stack_a, t_dlist **stack_b);
+void	push_swap(int size_a, t_dlist **stk_a, t_dlist **stk_b);
 // input_check.c
 int		check_all_digits(int ac, char **av);
 int		check_num_size(char **av);
-int		lst_check_dup(t_dlist *stack_a);
+int		lst_check_dup(t_dlist *stk_a);
 
 // operation_swap.c
-void	swap(char stack, t_dlist **stack_a, t_dlist **stack_b);
+void	swap(char stk, t_dlist **stk_a, t_dlist **stk_b);
 // operation_push.c
-void	push(char stack, t_dlist **stack_a, t_dlist **stack_b);
+void	push(char stk, t_dlist **stk_a, t_dlist **stk_b);
 // operation_rot_revrot.c
-void	rotate(char stack, t_dlist **stack_a, t_dlist **stack_b);
-void	rev_rotate(char stack, t_dlist **stack_a, t_dlist **stack_b);
+void	rotate(char stk, t_dlist **stk_a, t_dlist **stk_b);
+void	rev_rotate(char stk, t_dlist **stk_a, t_dlist **stk_b);
 
 // sort_small.c
-void	sort_small(t_dlist **stack_a, t_dlist **stack_b);
+void	sort_small(t_dlist **stk_a, t_dlist **stk_b);
 // sort_medium.c
-void	sort_medium(t_dlist **stack_a, t_dlist **stack_b, int size_a);
-void	find_num_rot_medium(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
-void	assign_index(t_dlist **stack, int size_a);
-int		find_largest_num(t_dlist *stack);
+void	sort_medium(t_dlist **stk_a, t_dlist **stk_b, int size_a, t_info *info);
+void	find_num_rot_medium(t_dlist **stk_a, t_dlist **stk_b, t_info *info);
+void	assign_index(t_dlist **stk, int size_a);
+int		find_largest_num(t_dlist *stk);
 // sort_big.c
-void	sort_big(t_dlist **stack_a, t_dlist **stack_b, int size_a, t_info *info);
-void	push_a_insertion(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
-void	push_a_sequence(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
-void	exp_half_sort_a(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
-void	exp_half_sort_rem(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
+void	sort_big(t_dlist **stk_a, t_dlist **stk_b, int size_a, t_info *info);
+void	push_a_insertion(t_dlist **stk_a, t_dlist **stk_b, t_info *info);
+void	push_a_sequence(t_dlist **stk_a, t_dlist **stk_b, t_info *info);
+void	exp_half_sort_a(t_dlist **stk_a, t_dlist **stk_b, t_info *info);
+void	exp_half_sort_rem(t_dlist **stk_a, t_dlist **stk_b, t_info *info);
 
 // utils_1.c
 long	ft_atoi_long(const char *str);
-int		is_stack_sorted(t_dlist *stack);
+int		is_stk_sorted(t_dlist *stk);
 void	init_info(t_info *info, int size_a);
-void	free_stack(t_dlist **stack);
-int		is_index_sorted(t_dlist *stack);
+void	free_stk(t_dlist **stk);
+int		is_index_sorted(t_dlist *stk);
 // utils_2.c
-void	opt_rot(char stack, t_info *info, t_dlist **stack_a,  t_dlist **stack_b);
-void	opt_rot_top_bot(char s, t_dlist **stack_a, t_dlist **stack_b, t_info *info);
-void	rotate_best_num(t_dlist **stack_a, t_dlist **stack_b, t_info *info);
-void	find_top_bottom_index_rem(t_dlist *stack_a, t_info *info);
-void	find_top_bottom_index(t_dlist *stack_a, t_info *info);
+void	opt_rot(char stk, t_info *info, t_dlist **stk_a, t_dlist **stk_b);
+void	opt_rot_top_bot(char s, t_dlist **stk_a, t_dlist **stk_b, t_info *info);
+void	rotate_best_num(t_dlist **stk_a, t_dlist **stk_b, t_info *info);
+void	find_top_bottom_index_rem(t_dlist *stk_a, t_info *info);
+void	find_top_bottom_index(t_dlist *stk_a, t_info *info);
 // doubly_linked_list_utils.c
-t_dlist	*create_stack_a(char **av);
+t_dlist	*create_stk_a(char **av);
 t_dlist	*ft_dlstnew(int num);
 t_dlist	*ft_dlstlast(t_dlist *lst);
 void	ft_dlstadd_back(t_dlist **lst, t_dlist *new);

@@ -14,45 +14,45 @@
 
 int	main(int ac, char **av)
 {
-	t_dlist	*stack_a;
-	t_dlist	*stack_b;
+	t_dlist	*stk_a;
+	t_dlist	*stk_b;
 
-	stack_a = NULL;
-	stack_b = NULL;
+	stk_a = NULL;
+	stk_b = NULL;
 	if (ac - 1 >= 1)
 	{
 		if (check_all_digits(ac, av) && check_num_size(av))
 		{
-			stack_a = create_stack_a(av);
-			if (lst_check_dup(stack_a))
+			stk_a = create_stk_a(av);
+			if (lst_check_dup(stk_a))
 			{
-				push_swap(ac - 1, &stack_a, &stack_b);
-				free_stack(&stack_a);
-				free_stack(&stack_b);
+				push_swap(ac - 1, &stk_a, &stk_b);
+				free_stk(&stk_a);
+				free_stk(&stk_b);
 				return (0);
 			}
 		}
 		write(2, "Error\n", 6);
 	}
-	free_stack(&stack_a);
-	free_stack(&stack_b);
+	free_stk(&stk_a);
+	free_stk(&stk_b);
 }
 
-void	push_swap(int size_a, t_dlist **stack_a, t_dlist **stack_b)
+void	push_swap(int size_a, t_dlist **stk_a, t_dlist **stk_b)
 {
 	t_info	*info;
-	
+
 	info = malloc(sizeof(t_info));
 	init_info(info, size_a);
-	if (is_stack_sorted(*stack_a))
+	if (is_stk_sorted(*stk_a))
 		return ;
 	else if (size_a == 2)
-		swap('a', stack_a, stack_b);
+		swap('a', stk_a, stk_b);
 	else if (size_a == 3)
-		sort_small(stack_a, stack_b);
+		sort_small(stk_a, stk_b);
 	else if (size_a <= 20)
-		sort_medium(stack_a, stack_b, size_a);
+		sort_medium(stk_a, stk_b, size_a, info);
 	else
-		sort_big(stack_a, stack_b, size_a, info);
+		sort_big(stk_a, stk_b, size_a, info);
 	free(info);
 }

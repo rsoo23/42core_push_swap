@@ -13,67 +13,67 @@
 #include "../includes/push_swap.h"
 
 /*
-take the top num from stack_b (tail), push it to the top of stack_a (head)
+take the top num from stk_b (tail), push it to the top of stk_a (head)
 possible cases:
-	- [x] stack a is empty
-	- [x] stack b is empty
-	- [x] only one node in stack b
+	- [x] stk a is empty
+	- [x] stk b is empty
+	- [x] only one node in stk b
 
 vice versa for push_b
 */
 
-static void	push_a(t_dlist **stack_a, t_dlist **stack_b)
+static void	push_a(t_dlist **stk_a, t_dlist **stk_b)
 {
 	t_dlist	*head_a;
 	t_dlist	*tail_b;
 
-	if (*stack_b == NULL)
+	if (*stk_b == NULL)
 		return ;
-	head_a = *stack_a;
-	tail_b = ft_dlstlast(*stack_b);
+	head_a = *stk_a;
+	tail_b = ft_dlstlast(*stk_b);
 	if (tail_b->prev != NULL)
 		tail_b->prev->next = NULL;
 	else
-		*stack_b = NULL;
+		*stk_b = NULL;
 	if (head_a != NULL)
 		head_a->prev = tail_b;
 	tail_b->prev = NULL;
 	tail_b->next = head_a;
-	*stack_a = tail_b;
+	*stk_a = tail_b;
 }
 
-static void	push_b(t_dlist **stack_a, t_dlist **stack_b)
+static void	push_b(t_dlist **stk_a, t_dlist **stk_b)
 {
 	t_dlist	*head_a;
 	t_dlist	*tail_b;
 
-	if (*stack_a == NULL)
+	if (*stk_a == NULL)
 		return ;
-	head_a = *stack_a;
-	tail_b = ft_dlstlast(*stack_b);
+	head_a = *stk_a;
+	tail_b = ft_dlstlast(*stk_b);
 	if (head_a->next != NULL)
 		head_a->next->prev = NULL;
 	else
-		*stack_a = NULL;
-	*stack_a = head_a->next;
+		*stk_a = NULL;
+	*stk_a = head_a->next;
 	head_a->prev = tail_b;
 	head_a->next = NULL;
 	if (tail_b != NULL)
 		tail_b->next = head_a;
 	else
-		*stack_b = head_a;
+		*stk_b = head_a;
 }
 
-void	push(char stack, t_dlist **stack_a, t_dlist **stack_b)
+void	push(char stk, t_dlist **stk_a, t_dlist **stk_b)
 {
-	if (stack == 'a')
+	if (stk == 'a')
 	{
-		push_a(stack_a, stack_b);
+		push_a(stk_a, stk_b);
 		write(1, "pa\n", 3);
 	}
-	else if (stack == 'b')
+	else if (stk == 'b')
 	{
-		push_b(stack_a, stack_b);
+		push_b(stk_a, stk_b);
 		write(1, "pb\n", 3);
 	}
 	return ;

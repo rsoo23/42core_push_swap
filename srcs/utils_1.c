@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:38:16 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/26 14:33:03 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/29 08:53:32 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,29 @@ long	ft_atoi_long(const char *str)
 	return (sign * number);
 }
 
-int	is_stack_sorted(t_dlist *stack)
+int	is_stk_sorted(t_dlist *stk)
 {
-	while (stack->next)
+	while (stk->next)
 	{
-		if (stack->content > stack->next->content)
+		if (stk->content > stk->next->content)
 			return (0);
-		stack = stack->next;
+		stk = stk->next;
 	}
 	return (1);
 }
 
-int	is_index_sorted(t_dlist *stack)
+int	is_index_sorted(t_dlist *stk)
 {
 	int	index;
 
 	index = 1;
-	if (stack->index == 1)
+	if (stk->index == 1)
 	{
-		while (stack->next)
+		while (stk->next)
 		{
-			if (stack->index != index)
+			if (stk->index != index)
 				return (0);
-			stack = stack->next;
+			stk = stk->next;
 			index++;
 		}
 		return (1);
@@ -67,19 +67,19 @@ int	is_index_sorted(t_dlist *stack)
 	return (0);
 }
 
-void	free_stack(t_dlist **stack)
+void	free_stk(t_dlist **stk)
 {
 	t_dlist	*temp;
 
-	if (!stack || !(*stack))
+	if (!stk || !(*stk))
 		return ;
-	while (*stack)
+	while (*stk)
 	{
-		temp = (*stack)->next;
-		free(*stack);
-		*stack = temp;
+		temp = (*stk)->next;
+		free(*stk);
+		*stk = temp;
 	}
-	*stack = NULL;
+	*stk = NULL;
 }
 
 void	init_info(t_info *info, int size_a)

@@ -6,82 +6,80 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:02:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/28 15:02:03 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/29 08:58:15 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	opt_rot(char stack, t_info *info, t_dlist **stack_a,  t_dlist **stack_b)
+void	opt_rot(char stk, t_info *info, t_dlist **stk_a, t_dlist **stk_b)
 {
 	int		rev_rot_count;
 	int		rot_count;
-	int		stack_size;
+	int		stk_size;
 
-	stack_size = 0;
-	if (stack == 'a')
-		stack_size = info->size_a;
-	else if (stack == 'b')
-		stack_size = info->size_b;
-	rev_rot_count = stack_size - info->pos;
+	stk_size = 0;
+	if (stk == 'a')
+		stk_size = info->size_a;
+	else if (stk == 'b')
+		stk_size = info->size_b;
+	rev_rot_count = stk_size - info->pos;
 	rot_count = info->pos;
 	if (rot_count <= rev_rot_count)
 		while (rot_count-- > 0)
-			rotate(stack, stack_a, stack_b);
+			rotate(stk, stk_a, stk_b);
 	else if (rot_count > rev_rot_count)
 		while (rev_rot_count-- > 0)
-			rev_rotate(stack, stack_a, stack_b);	
+			rev_rotate(stk, stk_a, stk_b);
 }
 
-void	opt_rot_top_bot(char s, t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+void	opt_rot_top_bot(char s, t_dlist **stk_a, t_dlist **stk_b, t_info *info)
 {
 	if (info->bot_pos >= info->top_pos)
 		while (info->top_pos-- > 0)
-			rotate(s, stack_a, stack_b);
+			rotate(s, stk_a, stk_b);
 	else if (info->bot_pos < info->top_pos)
 		while (info->bot_pos-- > 0)
-			rev_rotate(s, stack_a, stack_b);
+			rev_rotate(s, stk_a, stk_b);
 }
 
 /*
-Search stack b starting from the tail for any index where the difference between
+Search stk b starting from the tail for any index where the difference between
 head_a index and tail_b index is between 1 to 3.
 
 Find the index that takes the least amount of rotations to bring it to tail_b
 */
-void	rotate_best_num(t_dlist **stack_a, t_dlist **stack_b, t_info *info)
+void	rotate_best_num(t_dlist **stk_a, t_dlist **stk_b, t_info *info)
 {
 	t_dlist	*tail_b;
 	t_dlist	*head_b;
-	
-	tail_b = ft_dlstlast(*stack_b);
-	head_b = *stack_b;
+
+	tail_b = ft_dlstlast(*stk_b);
+	head_b = *stk_b;
 	info->top_pos = 0;
 	info->bot_pos = 1;
 	while (tail_b)
 	{
-		if ((*stack_a)->index - tail_b->index <= 2)
+		if ((*stk_a)->index - tail_b->index <= 2)
 			break ;
 		info->top_pos++;
 		tail_b = tail_b->prev;
 	}
 	while (head_b)
 	{
-		if ((*stack_a)->index - head_b->index <= 2)
+		if ((*stk_a)->index - head_b->index <= 2)
 			break ;
 		info->bot_pos++;
 		head_b = (head_b)->next;
 	}
-	opt_rot_top_bot('b', stack_a, stack_b, info);
+	opt_rot_top_bot('b', stk_a, stk_b, info);
 }
 
-void	find_top_bottom_index_rem(t_dlist *stack_a, t_info *info)
+void	find_top_bottom_index_rem(t_dlist *stk_a, t_info *info)
 {
-	t_dlist		*head_a;
 	t_dlist		*tail_a;
 
-	head_a = stack_a;
-	tail_a = ft_dlstlast(stack_a);
+	tail_a = ft_dlstlast(stk_a);
 	if (info->size_b == info->upper_lim)
 	{
 		info->part_size /= 2;
@@ -89,12 +87,12 @@ void	find_top_bottom_index_rem(t_dlist *stack_a, t_info *info)
 		if (info->part_size <= 10)
 			info->upper_lim = info->original_size_b;
 	}
-	while (head_a)
+	while (stk_a)
 	{
-		if (head_a->index <= info->upper_lim)
+		if (stk_a->index <= info->upper_lim)
 			break ;
 		info->top_pos++;
-		head_a = head_a->next;
+		stk_a = stk_a->next;
 	}
 	while (tail_a)
 	{
@@ -105,13 +103,11 @@ void	find_top_bottom_index_rem(t_dlist *stack_a, t_info *info)
 	}
 }
 
-void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
+void	find_top_bottom_index(t_dlist *stk_a, t_info *info)
 {
-	t_dlist	*head;
 	t_dlist	*tail;
 
-	head = stack_a;
-	tail = ft_dlstlast(stack_a);
+	tail = ft_dlstlast(stk_a);
 	if (info->size_b == info->upper_lim)
 	{
 		info->part_size /= 2;
@@ -119,12 +115,12 @@ void	find_top_bottom_index(t_dlist *stack_a, t_info *info)
 		if (info->part_size <= 10)
 			info->upper_lim = info->input_size - 3;
 	}
-	while (head)
+	while (stk_a)
 	{
-		if (head->index <= info->upper_lim)
+		if (stk_a->index <= info->upper_lim)
 			break ;
 		info->top_pos++;
-		head = head->next;
+		stk_a = stk_a->next;
 	}
 	while (tail)
 	{

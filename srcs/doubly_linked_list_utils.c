@@ -12,23 +12,23 @@
 
 #include "../includes/push_swap.h"
 
-t_dlist	*create_stack_a(char **av)
+t_dlist	*create_stk_a(char **av)
 {
 	int		i;
-	t_dlist	*temp_stack;
+	t_dlist	*temp_stk;
 	t_dlist	*new_node;
 
 	i = 0;
-	temp_stack = NULL;
+	temp_stk = NULL;
 	new_node = NULL;
 	while (av[++i])
 	{
 		new_node = ft_dlstnew(ft_atoi(av[i]));
 		if (!new_node)
 			return (NULL);
-		ft_dlstadd_back(&temp_stack, new_node);
+		ft_dlstadd_back(&temp_stk, new_node);
 	}
-	return (temp_stack);
+	return (temp_stk);
 }
 
 t_dlist	*ft_dlstnew(int num)

@@ -51,12 +51,12 @@ int	check_num_size(char **av)
 	return (1);
 }
 
-int	lst_check_dup(t_dlist *stack_a)
+int	lst_check_dup(t_dlist *stk_a)
 {
 	t_dlist	*current;
 	t_dlist	*runner;
 
-	current = stack_a;
+	current = stk_a;
 	while (current)
 	{
 		runner = current->next;

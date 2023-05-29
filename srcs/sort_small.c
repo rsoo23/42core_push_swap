@@ -23,29 +23,29 @@ Possible sorting steps:
 2			1
 */
 
-static int	find_largest_num_small(t_dlist *stack)
+static int	find_largest_num_small(t_dlist *stk)
 {
 	int	largest_num;
 
 	largest_num = -2147483648;
-	while (stack)
+	while (stk)
 	{
-		if (stack->content > largest_num)
-			largest_num = stack->content;
-		stack = stack->next;
+		if (stk->content > largest_num)
+			largest_num = stk->content;
+		stk = stk->next;
 	}
 	return (largest_num);
 }
 
-void	sort_small(t_dlist **stack_a, t_dlist **stack_b)
+void	sort_small(t_dlist **stk_a, t_dlist **stk_b)
 {
 	int		largest_num;
 
-	largest_num = find_largest_num_small(*stack_a);
-	if ((*stack_a)->content == largest_num)
-		rotate('a', stack_a, stack_b);
-	else if ((*stack_a)->next->content == largest_num)
-		rev_rotate('a', stack_a, stack_b);
-	if (!is_stack_sorted((*stack_a)))
-		swap('a', stack_a, stack_b);
+	largest_num = find_largest_num_small(*stk_a);
+	if ((*stk_a)->content == largest_num)
+		rotate('a', stk_a, stk_b);
+	else if ((*stk_a)->next->content == largest_num)
+		rev_rotate('a', stk_a, stk_b);
+	if (!is_stk_sorted((*stk_a)))
+		swap('a', stk_a, stk_b);
 }
