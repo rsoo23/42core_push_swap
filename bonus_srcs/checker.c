@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 	stk_b = NULL;
 	if (ac - 1 >= 1)
 	{
-		if (check_all_digits_bonus(ac, av) && check_num_size_bonus(av))
+		if (check_all_digits(ac - 1, av) && check_num_size_bonus(av))
 		{
 			stk_a = create_stk_a_bonus(av);
 			if (lst_check_dup(stk_a) && move_check_execute(&stk_a, &stk_b, av))
@@ -47,14 +47,41 @@ int	move_check_execute(t_dlist **stk_a, t_dlist **stk_b, char **av)
 	pos = 0;
 	while (av[pos + 1])
 		pos++;
-	action_list = ft_split(av[pos], ' ');
-	if (check_valid_action_exec(stk_a, stk_b, action_list))
+	action_list = ft_split(av[pos], '\n');
+	if (!(*action_list) || !(**action_list))
+		return (free_action_list(action_list, 0));
+	else if (check_valid_action_exec(stk_a, stk_b, action_list))
 	{
-		if (is_stk_sorted(*stk_a))
-			write(1, "OK", 2);
+		if (is_index_sorted(*stk_a))
+			write(1, "OK\n", 3);
 		else
-			write(1, "KO", 2);
-		return (1);
+			write(1, "KO\n", 3);
+		return (free_action_list(action_list, 1));
 	}
-	return (0);
+	return (free_action_list(action_list, 0));
+}
+
+int	check_valid_action_exec(t_dlist **stk_a, t_dlist **stk_b, char **a_lst)
+{
+	int		i;
+	int		j;
+	char	**valid_actions;
+
+	i = -1;
+	valid_actions = init_valid_actions();
+	while (a_lst[++i])
+	{
+		j = -1;
+		while (++j < 11)
+		{
+			if (!ft_strncmp(a_lst[i], valid_actions[j], ft_strlen(a_lst[i])))
+			{
+				execute_action(stk_a, stk_b, j);
+				break ;
+			}
+		}
+		if (j == 11)
+			return (free_v_actions(valid_actions, 0));
+	}
+	return (free_v_actions(valid_actions, 1));
 }

@@ -6,31 +6,35 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 10:07:10 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/29 16:22:46 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/29 22:51:37 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-int	check_all_digits_bonus(int ac, char **av)
+int	free_v_actions(char **v_actions, int n)
+{
+	int i;
+
+	i = -1;
+	while (++i < 11)
+		free(v_actions[i]);
+	free(v_actions);
+	return (n);
+}
+
+int	free_action_list(char **a_lst, int n)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (++i < ac - 1)
+	while (a_lst && a_lst[i])
 	{
-		j = 0;
-		while (av[i][j])
-		{
-			if (j == 0 && av[i][0] == '-')
-				j++;
-			if (!ft_isdigit(av[i][j]))
-				return (0);
-			j++;
-		}
+		free(a_lst[i]);
+		i++;
 	}
-	return (1);
+	free(a_lst);
+	return (n);
 }
 
 int	check_num_size_bonus(char **av)
@@ -69,7 +73,7 @@ char	**init_valid_actions(void)
 	return (valid_actions);
 }
 
-static void	execute_action(t_dlist **stk_a, t_dlist **stk_b, int j)
+void	execute_action(t_dlist **stk_a, t_dlist **stk_b, int j)
 {
 	if (j == 0)
 		swap_bonus('a', stk_a, stk_b);
@@ -93,33 +97,4 @@ static void	execute_action(t_dlist **stk_a, t_dlist **stk_b, int j)
 		rev_rotate_bonus('b', stk_a, stk_b);
 	else if (j == 10)
 		rev_rotate_bonus('r', stk_a, stk_b);
-}
-
-int	check_valid_action_exec(t_dlist **stk_a, t_dlist **stk_b, char **a_lst)
-{
-	int		i;
-	int		j;
-	char	**valid_actions;
-
-	if (!(*a_lst) || !(**a_lst))
-		return (0);
-	i = 0;
-	valid_actions = init_valid_actions();
-	while (a_lst[i])
-	{
-		j = 0;
-		while (j < 11)
-		{
-			if (!ft_strncmp(a_lst[i], valid_actions[j], ft_strlen(a_lst[i])))
-			{
-				execute_action(stk_a, stk_b, j);
-				break ;
-			}
-			j++;
-		}
-		if (j == 11)
-			return (0);
-		i++;
-	}
-	return (1);
 }

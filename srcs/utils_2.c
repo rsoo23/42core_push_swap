@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 09:02:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/29 08:58:15 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/29 23:43:14 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,8 @@ void	find_top_bottom_index_rem(t_dlist *stk_a, t_info *info)
 	}
 }
 
-void	find_top_bottom_index(t_dlist *stk_a, t_info *info)
+void	find_top_index(t_dlist **stk_a, t_dlist **stk_b, t_info *info)
 {
-	t_dlist	*tail;
-
-	tail = ft_dlstlast(stk_a);
 	if (info->size_b == info->upper_lim)
 	{
 		info->part_size /= 2;
@@ -115,18 +112,6 @@ void	find_top_bottom_index(t_dlist *stk_a, t_info *info)
 		if (info->part_size <= 10)
 			info->upper_lim = info->input_size - 3;
 	}
-	while (stk_a)
-	{
-		if (stk_a->index <= info->upper_lim)
-			break ;
-		info->top_pos++;
-		stk_a = stk_a->next;
-	}
-	while (tail)
-	{
-		if (tail->index <= info->upper_lim)
-			break ;
-		info->bot_pos++;
-		tail = tail->prev;
-	}
+	while (stk_a && (*stk_a)->index > info->upper_lim)
+		rotate('a', stk_a, stk_b);
 }

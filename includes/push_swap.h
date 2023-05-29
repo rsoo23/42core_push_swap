@@ -89,7 +89,7 @@ void	opt_rot(char stk, t_info *info, t_dlist **stk_a, t_dlist **stk_b);
 void	opt_rot_top_bot(char s, t_dlist **stk_a, t_dlist **stk_b, t_info *info);
 void	rotate_best_num(t_dlist **stk_a, t_dlist **stk_b, t_info *info);
 void	find_top_bottom_index_rem(t_dlist *stk_a, t_info *info);
-void	find_top_bottom_index(t_dlist *stk_a, t_info *info);
+void	find_top_index(t_dlist **stk_a, t_dlist **stk_b, t_info *info);
 // doubly_linked_list_utils.c
 t_dlist	*create_stk_a(char **av);
 t_dlist	*ft_dlstnew(int num);
