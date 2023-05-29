@@ -22,11 +22,13 @@ node2<-tail->NULL		[node3]<-head->[NULL]
 				bottom of stk
 */
 
-static void	rotate_a(t_dlist **stk)
+void	rotate_a(t_dlist **stk)
 {
 	t_dlist	*head;
 	t_dlist	*tail;
 
+	if (!(*stk))
+		return ;
 	head = *stk;
 	if (head->next == NULL)
 		return ;
@@ -48,11 +50,13 @@ node1<-node2->node3		  head<-node1->node2
 				bottom of stk
 */
 
-static void	rotate_b(t_dlist **stk)
+void	rotate_b(t_dlist **stk)
 {
 	t_dlist	*head;
 	t_dlist	*tail;
 
+	if (!(*stk))
+		return ;
 	head = *stk;
 	if ((head)->next == NULL)
 		return ;

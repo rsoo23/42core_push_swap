@@ -31,12 +31,14 @@ LIBFT = libft.a
 
 # Bonus Variables
 BONUS_NAME = checker
-BONUS_FILES = bonus_srcs/checker.c
+BONUS_DIR = bonus_srcs/
+BONUS_FILES = checker checker_utils_1 checker_utils_2
 BONUS_MAN_SRCS = doubly_linked_list_utils input_check operation_push \
 				operation_rot_revrot operation_swap sort_big sort_small \
 				sort_medium utils_1 utils_2
+BONUS_C_FILES = $(addprefix $(BONUS_DIR), $(addsuffix .c, $(BONUS_FILES)))
 BONUS_MAN_FILES = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(BONUS_MAN_SRCS)))
-BONUS_OBJ = $(BONUS_FILES:.c=.o)
+BONUS_C_OBJ = $(BONUS_C_FILES:.c=.o)
 BONUS_MAN_OBJ = $(BONUS_MAN_FILES:.c=.o)
 
 # Other utilities:
@@ -52,13 +54,13 @@ $(NAME): $(OBJ)
 
 bonus: $(BONUS_NAME)
 
-$(BONUS_NAME): $(BONUS_OBJ) $(BONUS_MAN_OBJ)
+$(BONUS_NAME): $(BONUS_C_OBJ) $(BONUS_MAN_OBJ)
 	make -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(BONUS_OBJ) $(BONUS_MAN_OBJ) -o $(BONUS_NAME) $(LIBFT_DIR)/$(LIBFT)
+	$(CC) $(CFLAGS) $(BONUS_C_OBJ) $(BONUS_MAN_OBJ) -o $(BONUS_NAME) $(LIBFT_DIR)/$(LIBFT)
 
 # cleaning, re, phony
 clean:
-	$(RM) $(OBJ) $(BONUS_OBJ)
+	$(RM) $(OBJ) $(BONUS_C_OBJ) $(BONUS_MAN_OBJ)
 	make clean -C $(LIBFT_DIR)
 
 fclean: clean

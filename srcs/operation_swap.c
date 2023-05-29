@@ -22,7 +22,7 @@ node1: head
 node2: next_node
 */
 
-static void	swap_a(t_dlist **stk_a)
+void	swap_a(t_dlist **stk_a)
 {
 	t_dlist	*head;
 	t_dlist	*next_node;
@@ -50,7 +50,7 @@ node2: prev_node
 node3: tail
 */
 
-static void	swap_b(t_dlist **stk_b)
+void	swap_b(t_dlist **stk_b)
 {
 	t_dlist	*prev_node;
 	t_dlist	*tail;

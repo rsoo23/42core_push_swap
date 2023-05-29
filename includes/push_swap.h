@@ -52,11 +52,17 @@ int		lst_check_dup(t_dlist *stk_a);
 
 // operation_swap.c
 void	swap(char stk, t_dlist **stk_a, t_dlist **stk_b);
+void	swap_a(t_dlist **stk_a);
+void	swap_b(t_dlist **stk_b);
 // operation_push.c
 void	push(char stk, t_dlist **stk_a, t_dlist **stk_b);
+void	push_a(t_dlist **stk_a, t_dlist **stk_b);
+void	push_b(t_dlist **stk_a, t_dlist **stk_b);
 // operation_rot_revrot.c
 void	rotate(char stk, t_dlist **stk_a, t_dlist **stk_b);
 void	rev_rotate(char stk, t_dlist **stk_a, t_dlist **stk_b);
+void	rotate_a(t_dlist **stk);
+void	rotate_b(t_dlist **stk);
 
 // sort_small.c
 void	sort_small(t_dlist **stk_a, t_dlist **stk_b);

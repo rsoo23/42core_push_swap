@@ -22,7 +22,7 @@ possible cases:
 vice versa for push_b
 */
 
-static void	push_a(t_dlist **stk_a, t_dlist **stk_b)
+void	push_a(t_dlist **stk_a, t_dlist **stk_b)
 {
 	t_dlist	*head_a;
 	t_dlist	*tail_b;
@@ -42,7 +42,7 @@ static void	push_a(t_dlist **stk_a, t_dlist **stk_b)
 	*stk_a = tail_b;
 }
 
-static void	push_b(t_dlist **stk_a, t_dlist **stk_b)
+void	push_b(t_dlist **stk_a, t_dlist **stk_b)
 {
 	t_dlist	*head_a;
 	t_dlist	*tail_b;
