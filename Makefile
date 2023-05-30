@@ -19,9 +19,9 @@ INCLUDES = includes/push_swap.h
 
 # c files in srcs
 SRCS_DIR = srcs/
-SRCS_FILES = doubly_linked_list_utils input_check operation_push \
+SRCS_FILES = main doubly_linked_list_utils input_check operation_push \
 				operation_rot_revrot operation_swap push_swap \
-				sort_big sort_small sort_medium utils_1 utils_2
+				sort_big sort_small sort_medium utils_1 utils_2 utils_3
 C_FILES = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 # obj files: /objs will be created to store the obj files
 OBJ = $(C_FILES:.c=.o)
@@ -32,10 +32,10 @@ LIBFT = libft.a
 # Bonus Variables
 BONUS_NAME = checker
 BONUS_DIR = bonus_srcs/
-BONUS_FILES = checker checker_utils_1 checker_utils_2
+BONUS_FILES = checker_main checker_utils_1
 BONUS_MAN_SRCS = doubly_linked_list_utils input_check operation_push \
 				operation_rot_revrot operation_swap sort_big sort_small \
-				sort_medium utils_1 utils_2
+				sort_medium utils_1 utils_2 push_swap
 BONUS_C_FILES = $(addprefix $(BONUS_DIR), $(addsuffix .c, $(BONUS_FILES)))
 BONUS_MAN_FILES = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(BONUS_MAN_SRCS)))
 BONUS_C_OBJ = $(BONUS_C_FILES:.c=.o)

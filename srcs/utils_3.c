@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 11:03:25 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/11 11:03:25 by rsoo             ###   ########.fr       */
+/*   Created: 2023/05/30 11:57:58 by rsoo              #+#    #+#             */
+/*   Updated: 2023/05/30 11:57:58 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	push_swap(int size_a, t_dlist **stk_a, t_dlist **stk_b)
+void	exp_half_sort_2(t_dlist **stk_a, t_dlist **stk_b, t_info *info)
 {
-	t_info	*info;
-
-	info = malloc(sizeof(t_info));
-	init_info(info, size_a);
-	if (is_stk_sorted(*stk_a))
+	info->top_pos = 0;
+	info->bot_pos = 1;
+	if (info->size_b <= info->input_size / 2)
 	{
-		free(info);
-		return ;
+		find_top_bottom_index_rem(*stk_a, info);
+		opt_rot_top_bot('a', stk_a, stk_b, info);
 	}
-	else if (size_a == 2)
-		swap('a', stk_a, stk_b);
-	else if (size_a == 3)
-		sort_small(stk_a, stk_b);
-	else if (size_a <= 20)
-		sort_medium(stk_a, stk_b, size_a, info);
-	else
-		sort_big(stk_a, stk_b, size_a, info);
-	free(info);
+	push('b', stk_a, stk_b);
+	info->pivot = info->upper_lim - info->part_size / 2;
+	if (ft_dlstlast(*stk_b)->index < info->pivot)
+		rotate('b', stk_a, stk_b);
 }

@@ -12,21 +12,35 @@
 
 #include "../includes/push_swap.h"
 
-// checks if all inputs consists of digits only ('-' sign also included)
-int	check_all_digits(int ac, char **av)
+int	free_2D_array(char **arr, int n)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (++i < ac)
+	while (arr && arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+	return (n);
+}
+
+// checks if all inputs consists of digits only ('-' sign also included)
+int	check_if_all_digits(char **num_arr)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (num_arr[++i])
 	{
 		j = 0;
-		while (av[i][j])
+		while (num_arr[i][j])
 		{
-			if (j == 0 && av[i][0] == '-')
+			if (j == 0 && num_arr[i][j] == '-')
 				j++;
-			if (!ft_isdigit(av[i][j]))
+			if (!ft_isdigit(num_arr[i][j]))
 				return (0);
 			j++;
 		}
@@ -35,16 +49,16 @@ int	check_all_digits(int ac, char **av)
 }
 
 // check whether input number is within the int range
-int	check_num_size(char **av)
+int	check_num_size(char **num_arr)
 {
-	int		av_count;
+	int		i;
 	long	num;
 
-	av_count = 0;
+	i = -1;
 	num = 0;
-	while (av[++av_count])
+	while (num_arr[++i])
 	{
-		num = ft_atoi_long(av[av_count]);
+		num = ft_atoi_long(num_arr[i]);
 		if (num > 2147483647 || num < -2147483648)
 			return (0);
 	}
@@ -70,3 +84,22 @@ int	lst_check_dup(t_dlist *stk_a)
 	}
 	return (1);
 }
+
+int	check_digits_create_stk(char *num_str, t_dlist **stk_a)
+{
+	char	**num_arr;
+
+	num_arr = ft_split(num_str, ' ');
+	if (!(*num_arr) || !(**num_arr))
+		return (free_2D_array(num_arr, 0));
+	if (!check_if_all_digits(num_arr))
+		return (free_2D_array(num_arr, 0));
+	if (!check_num_size(num_arr))
+		return (free_2D_array(num_arr, 0));
+	*stk_a = create_stk_a(num_arr);
+	if (!lst_check_dup(*stk_a))
+		return (free_2D_array(num_arr, 0));
+	return (free_2D_array(num_arr, 1));
+}
+
+

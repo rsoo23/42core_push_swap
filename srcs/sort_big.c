@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 09:30:51 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/29 23:43:23 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/30 14:16:43 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sort_big(t_dlist **stk_a, t_dlist **stk_b, int size_a, t_info *info)
 	assign_index(stk_a, size_a);
 	while (info->size_b < info->input_size - 3)
 	{
-		exp_half_sort_a(stk_a, stk_b, info);
+		exp_half_sort_1(stk_a, stk_b, info);
 		info->size_b++;
 	}
 	sort_small(stk_a, stk_b);
@@ -86,17 +86,9 @@ void	push_a_sequence(t_dlist **stk_a, t_dlist **stk_b, t_info *info)
 	}
 }
 
-void	exp_half_sort_a(t_dlist **stk_a, t_dlist **stk_b, t_info *info)
+void	exp_half_sort_1(t_dlist **stk_a, t_dlist **stk_b, t_info *info)
 {
-	info->top_pos = 0;
-	info->bot_pos = 1;
-	if (info->size_b > info->input_size / 2)
-		find_top_index(stk_a, stk_b, info);
-	else if (info->size_b <= info->input_size / 2)
-	{
-		find_top_bottom_index_rem(*stk_a, info);
-		opt_rot_top_bot('a', stk_a, stk_b, info);
-	}
+	find_top_index(stk_a, stk_b, info);
 	push('b', stk_a, stk_b);
 	info->pivot = info->upper_lim - info->part_size / 2;
 	if (ft_dlstlast(*stk_b)->index < info->pivot 
@@ -105,10 +97,6 @@ void	exp_half_sort_a(t_dlist **stk_a, t_dlist **stk_b, t_info *info)
 	else if (ft_dlstlast(*stk_b)->index < info->pivot)
 		rotate('b', stk_a, stk_b);
 }
-
-// {rra:622, pb:748,         ra:673, rb:1206, sa:1, pa:748, rrb:1095} without rr
-// {rra:751, pb:748, rr:217, ra:588, rb:989,  sa:1, pa:748, rrb:1095} with rr
-// {rra:440,pb:748,rr:184,ra:716,rb:1023,sa:1,pa:748,rrb:1096}
 
 void	exp_half_sort_rem(t_dlist **stk_a, t_dlist **stk_b, t_info *info)
 {
@@ -121,11 +109,11 @@ void	exp_half_sort_rem(t_dlist **stk_a, t_dlist **stk_b, t_info *info)
 		if ((*stk_a)->index > info->upper_lim)
 			rotate('a', stk_a, stk_b);
 		info->size_b--;
-	}
+	} // pushing to a while splitting half (lower half on top, higher half on bottom)
 	info->part_size = info->rem_midpoint / 2;
-	while (info->size_b < info->original_size_b)
+	while (info->size_b < info->original_size_b) // size_b
 	{
-		exp_half_sort_a(stk_a, stk_b, info);
+		exp_half_sort_2(stk_a, stk_b, info);
 		info->size_b++;
 	}
 }
