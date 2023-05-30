@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 13:38:16 by rsoo              #+#    #+#             */
-/*   Updated: 2023/05/29 08:53:32 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/05/30 15:39:33 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,14 @@ int	is_index_sorted(t_dlist *stk)
 	int	index;
 
 	index = 1;
-	if (stk->index == 1)
+	while (stk)
 	{
-		while (stk->next)
-		{
-			if (stk->index != index)
-				return (0);
-			stk = stk->next;
-			index++;
-		}
-		return (1);
+		if (stk->index != index)
+			return (0);
+		stk = stk->next;
+		index++;
 	}
-	return (0);
+	return (1);
 }
 
 void	free_stk(t_dlist **stk)

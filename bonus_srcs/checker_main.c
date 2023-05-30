@@ -12,6 +12,8 @@
 
 #include "../includes/checker.h"
 
+#include <stdio.h>
+
 int	main(int ac, char **av)
 {
 	t_dlist	*stk_a;
@@ -19,12 +21,11 @@ int	main(int ac, char **av)
 
 	stk_a = NULL;
 	stk_b = NULL;
-	if (ac == 2)
+	if (ac == 3)
 	{
 		if (check_digits_create_stk(av[1], &stk_a) \
 		&& move_check_execute(&stk_a, &stk_b, av[2]))
 		{
-			push_swap(ft_dlstsize(stk_a), &stk_a, &stk_b);
 			free_stk(&stk_a);
 			free_stk(&stk_b);
 			return (0);
@@ -44,7 +45,7 @@ int	move_check_execute(t_dlist **stk_a, t_dlist **stk_b, char *move_arr)
 		return (free_2D_array(action_list, 0));
 	else if (check_valid_action_exec(stk_a, stk_b, action_list))
 	{
-		if (is_index_sorted(*stk_a))
+		if (is_stk_sorted(*stk_a))
 			write(1, "OK\n", 3);
 		else
 			write(1, "KO\n", 3);
@@ -73,16 +74,16 @@ int	check_valid_action_exec(t_dlist **stk_a, t_dlist **stk_b, char **a_lst)
 			}
 		}
 		if (j == 11)
-			return (free_2D_array(valid_actions, 0));
+			return (free_v_actions(valid_actions, 0));
 	}
-	return (free_2D_array(valid_actions, 1));
+	return (free_v_actions(valid_actions, 1));
 }
 
 char	**init_valid_actions(void)
 {
 	char	**valid_actions;
 
-	valid_actions = malloc(sizeof(char *) * 11);
+	valid_actions = malloc(sizeof(char *) * 12);
 	valid_actions[0] = ft_strdup("sa");
 	valid_actions[1] = ft_strdup("sb");
 	valid_actions[2] = ft_strdup("ss");

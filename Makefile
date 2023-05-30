@@ -35,7 +35,7 @@ BONUS_DIR = bonus_srcs/
 BONUS_FILES = checker_main checker_utils_1
 BONUS_MAN_SRCS = doubly_linked_list_utils input_check operation_push \
 				operation_rot_revrot operation_swap sort_big sort_small \
-				sort_medium utils_1 utils_2 push_swap
+				sort_medium utils_1 utils_2 utils_3 push_swap
 BONUS_C_FILES = $(addprefix $(BONUS_DIR), $(addsuffix .c, $(BONUS_FILES)))
 BONUS_MAN_FILES = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(BONUS_MAN_SRCS)))
 BONUS_C_OBJ = $(BONUS_C_FILES:.c=.o)

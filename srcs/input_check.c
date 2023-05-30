@@ -16,12 +16,9 @@ int	free_2D_array(char **arr, int n)
 {
 	int	i;
 
-	i = 0;
-	while (arr && arr[i])
-	{
+	i = -1;
+	while (arr[++i])
 		free(arr[i]);
-		i++;
-	}
 	free(arr);
 	return (n);
 }
