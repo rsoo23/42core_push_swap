@@ -12,8 +12,6 @@
 
 #include "../includes/checker.h"
 
-#include <stdio.h>
-
 int	main(int ac, char **av)
 {
 	t_dlist	*stk_a;
@@ -23,12 +21,19 @@ int	main(int ac, char **av)
 	stk_b = NULL;
 	if (ac == 3)
 	{
-		if (check_digits_create_stk(av[1], &stk_a) \
-		&& move_check_execute(&stk_a, &stk_b, av[2]))
+		if (check_digits_create_stk(av[1], &stk_a))
 		{
-			free_stk(&stk_a);
-			free_stk(&stk_b);
-			return (0);
+			if (is_stk_sorted(stk_a))
+			{
+				write(1, "OK\n", 3);
+				return (0);
+			}
+			if (move_check_execute(&stk_a, &stk_b, av[2]))
+			{
+				free_stk(&stk_a);
+				free_stk(&stk_b);
+				return (0);
+			}
 		}
 		write(2, "Error\n", 6);
 	}
