@@ -49,13 +49,13 @@ BONUS_MAN_OBJ = $(BONUS_MAN_FILES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C $(LIBFT_DIR)
+	make bonus -C $(LIBFT_DIR)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT_DIR)/$(LIBFT)
 
 bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(BONUS_C_OBJ) $(BONUS_MAN_OBJ)
-	make -C $(LIBFT_DIR)
+	make bonus -C $(LIBFT_DIR)
 	$(CC) $(CFLAGS) $(BONUS_C_OBJ) $(BONUS_MAN_OBJ) -o $(BONUS_NAME) $(LIBFT_DIR)/$(LIBFT)
 
 # cleaning, re, phony

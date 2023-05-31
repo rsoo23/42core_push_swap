@@ -15,10 +15,10 @@
 
 # include "push_swap.h"
 // checker.c
-int		move_check_execute(t_dlist **stk_a, t_dlist **stk_b, char *move_arr);
-int		check_valid_action_exec(t_dlist **stk_a, t_dlist **stk_b, char **a_lst);
+int		move_check_execute(t_dlist **stk_a, t_dlist **stk_b);
+int		check_valid_action(char *move);
 char	**init_valid_actions(void);
-void	execute_action(t_dlist **stk_a, t_dlist **stk_b, int j);
+void	execute_action(t_dlist **stk_a, t_dlist **stk_b, int i);
 // checker_utils_1.c
 int     free_v_actions(char **v_actions, int n);
 void	rev_rotate_bonus(char stk, t_dlist **stk_a, t_dlist **stk_b);
